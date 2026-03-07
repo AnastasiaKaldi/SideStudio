@@ -12,6 +12,10 @@
   margin-right: auto;
 }
 
+.services__header h1 {
+  font-size: var(--font-size-xl);
+}
+
 .services__subtitle {
   text-align: center;
   font-size: var(--font-size-md);
@@ -63,6 +67,7 @@
 }
 
 .services__section-inner h2 {
+  font-size: var(--font-size-lg);
   margin-bottom: 1rem;
 }
 
@@ -101,4 +106,27 @@
 .services__cta:hover {
   background-color: var(--color-black);
   color: var(--color-white);
+}
+
+@media (max-width: 768px) {
+  .services {
+    padding: 5rem var(--content-padding) 3rem;
+  }
+
+  .services__header h1 {
+    font-size: var(--font-size-lg);
+  }
+
+  .services__section-inner h2 {
+    font-size: var(--font-size-md);
+  }
+
+  .services__section {
+    padding: 2.5rem 0;
+  }
+
+  .services__cta {
+    font-size: var(--font-size-sm);
+    padding: 0.7rem 1.5rem;
+  }
 }
