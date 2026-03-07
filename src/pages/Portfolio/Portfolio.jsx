@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import './Portfolio.css'
 
 const projects = [
@@ -22,6 +23,10 @@ function Portfolio() {
 
   return (
     <div className="portfolio">
+      <Helmet>
+        <title>portfolio | side studio</title>
+        <meta name="description" content="Selected work and collaborations by Side Studio — brand identities, campaign shoots, content strategies, and creative projects for contemporary brands." />
+      </Helmet>
       <div className="portfolio__header">
         <h1>our creative portfolio</h1>
         <p className="portfolio__subtitle">selected work and collaborations.</p>

@@ -165,11 +165,31 @@
 }
 
 @media (max-width: 768px) {
+  .portfolio {
+    padding: 5rem var(--content-padding) 3rem;
+  }
+
+  .portfolio__header {
+    margin-bottom: 2rem;
+  }
+
   .portfolio__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
   }
 
   .portfolio__project-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .portfolio__cta {
+    font-size: var(--font-size-sm);
+    padding: 0.7rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio__grid {
     grid-template-columns: 1fr;
   }
 }
