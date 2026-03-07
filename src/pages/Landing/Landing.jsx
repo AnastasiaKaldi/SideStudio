@@ -22,11 +22,6 @@ const flowUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 1.3, ease } },
 }
 
-const flowScale = {
-  hidden: { opacity: 0, scale: 0.96 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 1.2, ease } },
-}
-
 const stagger = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.15 } },
@@ -172,8 +167,8 @@ function Landing() {
       <section className="landing__section landing__section--hero">
         <motion.div
           className="landing__hero"
-          initial={{ opacity: 0, y: 30, scale: 0.97 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, ease }}
         >
           <img src="/hero.png" alt="side creative studio" className="landing__hero-image" />
@@ -191,10 +186,10 @@ function Landing() {
       {/* VIDEO */}
       <motion.section
         className="landing__section landing__section--video"
-        initial="hidden"
-        whileInView="visible"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.3 }}
-        variants={flowScale}
+        transition={{ duration: 1.2, ease }}
       >
         <video
           className="landing__video"
