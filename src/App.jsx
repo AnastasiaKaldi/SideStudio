@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import Navbar from './components/Navbar/Navbar'
@@ -13,13 +14,19 @@ const pagesWithOwnFooter = ['/about']
 
 const pageTransition = {
   initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
-  exit: { opacity: 0, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } },
+  animate: { opacity: 1, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } },
+  exit: { opacity: 0, transition: { duration: 0.2, ease: [0.16, 1, 0.3, 1] } },
 }
 
 function AppContent() {
   const location = useLocation()
   const hideGlobalFooter = pagesWithOwnFooter.includes(location.pathname)
+
+  useEffect(() => {
+    if (!location.hash) {
+      window.scrollTo(0, 0)
+    }
+  }, [location.pathname])
 
   return (
     <div className="app">

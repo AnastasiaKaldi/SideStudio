@@ -7,16 +7,16 @@ const ease = [0.16, 1, 0.3, 1]
 const staggerContainer = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.1, delayChildren: 0.05 },
+    transition: { staggerChildren: 0.05, delayChildren: 0 },
   },
 }
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 25 },
+  hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease },
+    transition: { duration: 0.4, ease },
   },
 }
 
@@ -31,7 +31,7 @@ function Footer() {
     >
       <div className="footer__inner">
         <motion.div className="footer__logo" variants={fadeUp}>
-          <img src="/logowhite.png" alt="S/DE" className="footer__logo-img" />
+          <img src="/logowhite.png" alt="S/DE" className="footer__logo-img" loading="lazy" />
         </motion.div>
 
         <motion.div className="footer__nav" variants={fadeUp}>

@@ -22,9 +22,9 @@ function About() {
       <section className="about__welcome">
         <motion.h1
           className="about__title"
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease, delay: 0.2 }}
+          transition={{ duration: 0.5, ease }}
         >
           Welcome to Side Creative Studio
         </motion.h1>
@@ -37,9 +37,9 @@ function About() {
           ].map((text, i) => (
             <motion.p
               key={i}
-              initial={{ opacity: 0, y: 25 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease, delay: 0.5 + i * 0.15 }}
+              transition={{ duration: 0.5, ease, delay: 0.15 + i * 0.08 }}
             >
               {text}
             </motion.p>
@@ -48,11 +48,11 @@ function About() {
 
         <motion.div
           className="about__signature"
-          initial={{ opacity: 0, x: 30 }}
+          initial={{ opacity: 0, x: 15 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease, delay: 1.1 }}
+          transition={{ duration: 0.5, ease, delay: 0.4 }}
         >
-          <img src="/doublens.png" alt="by the double N's" className="about__signature-img" />
+          <img src="/doublens.png" alt="by the double N's" className="about__signature-img" loading="lazy" />
         </motion.div>
       </section>
 
@@ -66,18 +66,18 @@ function About() {
             viewport={{ once: true, amount: 0.3 }}
             variants={{
               hidden: {},
-              visible: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
+              visible: { transition: { staggerChildren: 0.06, delayChildren: 0 } },
             }}
           >
             <motion.h2
               className="about__person-name"
               variants={{
-                hidden: { opacity: 0, x: -30, letterSpacing: '0.2em' },
+                hidden: { opacity: 0, x: -15, letterSpacing: '0.15em' },
                 visible: {
                   opacity: 1,
                   x: 0,
                   letterSpacing: '0.05em',
-                  transition: { duration: 0.9, ease },
+                  transition: { duration: 0.5, ease },
                 },
               }}
             >
@@ -93,8 +93,8 @@ function About() {
                 <motion.p
                   key={i}
                   variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
+                    hidden: { opacity: 0, y: 10 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease } },
                   }}
                 >
                   {text}
@@ -104,7 +104,7 @@ function About() {
           </motion.div>
 
           <div className="about__person-image">
-            <img src="/aboutpagenikos.jpg" alt="nikolaos" />
+            <img src="/aboutpagenikos.jpg" alt="nikolaos" loading="lazy" />
           </div>
         </div>
 
@@ -117,18 +117,18 @@ function About() {
             viewport={{ once: true, amount: 0.3 }}
             variants={{
               hidden: {},
-              visible: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
+              visible: { transition: { staggerChildren: 0.06, delayChildren: 0 } },
             }}
           >
             <motion.h2
               className="about__person-name"
               variants={{
-                hidden: { opacity: 0, x: 30, letterSpacing: '0.2em' },
+                hidden: { opacity: 0, x: 15, letterSpacing: '0.15em' },
                 visible: {
                   opacity: 1,
                   x: 0,
                   letterSpacing: '0.05em',
-                  transition: { duration: 0.9, ease },
+                  transition: { duration: 0.5, ease },
                 },
               }}
             >
@@ -144,8 +144,8 @@ function About() {
                 <motion.p
                   key={i}
                   variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
+                    hidden: { opacity: 0, y: 10 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease } },
                   }}
                 >
                   {text}
@@ -155,7 +155,7 @@ function About() {
           </motion.div>
 
           <div className="about__person-image">
-            <img src="/aboutpagenikol.jpg" alt="nikoleta" />
+            <img src="/aboutpagenikol.jpg" alt="nikoleta" loading="lazy" />
           </div>
         </div>
       </section>
