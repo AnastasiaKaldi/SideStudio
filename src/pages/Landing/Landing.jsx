@@ -5,29 +5,6 @@ import { motion } from 'framer-motion'
 import ProjectCarousel from '../../components/ProjectCarousel/ProjectCarousel'
 import './Landing.css'
 
-const serviceCards = [
-  {
-    id: 1,
-    title: 'creative direction',
-    description: 'shaping the core idea behind a brand\'s visual and communication output across all channels.',
-  },
-  {
-    id: 2,
-    title: 'content creation',
-    description: 'original visual content from concept to post-production — photography, videography, and design.',
-  },
-  {
-    id: 3,
-    title: 'strategy & planning',
-    description: 'monthly planning aligned with brand goals — content calendars, campaigns, and kpis.',
-  },
-  {
-    id: 4,
-    title: 'social media',
-    description: 'end-to-end management of your digital presence — content, community, and growth.',
-  },
-]
-
 const bentoServices = [
   {
     id: 1,
@@ -232,7 +209,7 @@ function Landing() {
           </motion.p>
 
           <motion.div className="landing__intro-about" variants={staggerItem}>
-            <span className="landing__intro-label">about</span>
+            <span className="section-label">about</span>
             <Link to="/about" className="landing__intro-link">read more</Link>
           </motion.div>
 
@@ -273,15 +250,15 @@ function Landing() {
       {/* WHAT WE DO */}
       <section className="landing__section landing__section--projects">
         <div className="landing__projects-header">
-          <motion.h2
-            className="landing__projects-title"
+          <motion.span
+            className="section-label"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.8, ease }}
           >
             what we do
-          </motion.h2>
+          </motion.span>
           <motion.p
             className="landing__projects-subtitle"
             initial={{ opacity: 0, y: 20 }}
@@ -296,59 +273,29 @@ function Landing() {
         <ProjectCarousel />
       </section>
 
-      {/* SERVICES CARDS (landing teaser) */}
-      <section className="landing__section landing__section--service-cards">
-        <motion.div
-          className="service-cards"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={staggerContainer}
-        >
-          <motion.h2 className="service-cards__title" variants={staggerItem}>
-            our services
-          </motion.h2>
-          <motion.p className="service-cards__subtitle" variants={staggerItem}>
-            what we bring to the table.
-          </motion.p>
-
-          <motion.div
-            className="service-cards__grid"
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
-            }}
-          >
-            {serviceCards.map((service) => (
-              <motion.div
-                key={service.id}
-                className="service-card"
-                variants={{
-                  hidden: { opacity: 0, y: 40 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
-                }}
-              >
-                <div className="service-card__inner">
-                  <div className="service-card__front">
-                    <div className="service-card__image-placeholder" />
-                    <span className="service-card__front-label">{service.title}</span>
-                  </div>
-                  <div className="service-card__back">
-                    <h3 className="service-card__back-title">{service.title}</h3>
-                    <p className="service-card__back-text">{service.description}</p>
-                    <a href="#services" className="service-card__back-cta">
-                      learn more &rarr;
-                    </a>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-      </section>
-
       {/* SERVICES BENTO GRID */}
       <section id="services" className="landing__section landing__section--services">
+        <div className="services-bento__header">
+          <motion.span
+            className="section-label"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.7, ease }}
+          >
+            our services
+          </motion.span>
+          <motion.p
+            className="services-bento__subtitle"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.7, ease, delay: 0.15 }}
+          >
+            what we do and how we help brands grow.
+          </motion.p>
+        </div>
+
         <motion.div
           className="services-bento"
           initial="hidden"
@@ -356,13 +303,6 @@ function Landing() {
           viewport={{ once: true, amount: 0.1 }}
           variants={staggerContainer}
         >
-          <motion.h2 className="services-bento__title" variants={staggerItem}>
-            our services
-          </motion.h2>
-          <motion.p className="services-bento__subtitle" variants={staggerItem}>
-            what we do and how we help brands grow.
-          </motion.p>
-
           <motion.div
             className="services-bento__grid"
             variants={{
@@ -410,6 +350,16 @@ function Landing() {
 
       {/* CONTACT — POSTCARD */}
       <section id="contact" className="landing__section landing__section--contact">
+        <motion.div
+          className="contact-header"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.7, ease }}
+        >
+          <span className="section-label">contact us</span>
+        </motion.div>
+
         <motion.div
           className="postcard"
           initial="hidden"
