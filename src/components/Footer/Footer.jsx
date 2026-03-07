@@ -1,19 +1,43 @@
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import './Footer.css'
+
+const ease = [0.16, 1, 0.3, 1]
+
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.1, delayChildren: 0.05 },
+  },
+}
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 25 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease },
+  },
+}
 
 function Footer() {
   return (
-    <footer className="footer">
+    <motion.footer
+      className="footer"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={staggerContainer}
+    >
       <div className="footer__inner">
-        <div className="footer__logo">
+        <motion.div className="footer__logo" variants={fadeUp}>
           <img src="/logowhite.png" alt="S/DE" className="footer__logo-img" />
-        </div>
+        </motion.div>
 
-        <div className="footer__nav">
+        <motion.div className="footer__nav" variants={fadeUp}>
           <div className="footer__nav-group">
             <Link to="/about" className="footer__nav-link">about</Link>
             <Link to="/services" className="footer__nav-link">services</Link>
-            <Link to="/portfolio" className="footer__nav-link">studio portfolio</Link>
             <Link to="/contact" className="footer__nav-link">contact</Link>
           </div>
 
@@ -23,18 +47,18 @@ function Footer() {
             <a href="#" className="footer__nav-link">pinterest</a>
             <a href="#" className="footer__nav-link">linkedin</a>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="footer__legal">
+        <motion.div className="footer__legal" variants={fadeUp}>
           <a href="#" className="footer__legal-link">privacy policy</a>
           <a href="#" className="footer__legal-link">terms & conditions</a>
-        </div>
+        </motion.div>
 
-        <div className="footer__bottom">
+        <motion.div className="footer__bottom" variants={fadeUp}>
           <span className="footer__copyright">all rights reserved</span>
-        </div>
+        </motion.div>
       </div>
-    </footer>
+    </motion.footer>
   )
 }
 
