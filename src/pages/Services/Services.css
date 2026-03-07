@@ -1,0 +1,104 @@
+.services {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 8rem var(--content-padding) 4rem;
+}
+
+.services__header {
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.services__subtitle {
+  text-align: center;
+  font-size: var(--font-size-md);
+  color: var(--color-gray);
+  margin-top: 0.8rem;
+  font-weight: var(--font-weight-light);
+}
+
+.services__dynamic {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-gray);
+}
+
+.services__typewriter {
+  color: var(--color-black);
+  font-weight: var(--font-weight-medium);
+}
+
+.services__cursor {
+  animation: blink 0.8s infinite;
+  color: var(--color-black);
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.services__content {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.services__section {
+  padding: 4rem 0;
+  border-bottom: 1px solid var(--color-light-gray);
+}
+
+.services__section:last-child {
+  border-bottom: none;
+}
+
+.services__section-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.services__section-inner h2 {
+  margin-bottom: 1rem;
+}
+
+.services__punchline {
+  text-align: center;
+  font-style: italic;
+  color: var(--color-gray);
+  font-size: var(--font-size-sm);
+  margin-bottom: 1rem;
+}
+
+.services__footer-cta {
+  text-align: center;
+  padding: 4rem 0 2rem;
+  border-top: 1px solid var(--color-light-gray);
+}
+
+.services__closing {
+  text-align: center;
+  font-style: italic;
+  color: var(--color-gray);
+  font-size: var(--font-size-sm);
+}
+
+.services__cta {
+  display: inline-block;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  margin-top: 1.5rem;
+  padding: 0.8rem 2rem;
+  border: 1px solid var(--color-black);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  text-transform: lowercase;
+}
+
+.services__cta:hover {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}

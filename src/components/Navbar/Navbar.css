@@ -1,0 +1,135 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: var(--color-white);
+}
+
+.navbar__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1.5rem var(--content-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar__logo {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: -0.01em;
+  text-transform: lowercase;
+  display: flex;
+  align-items: center;
+}
+
+.navbar__logo-img {
+  height: 90px;
+  width: auto;
+}
+
+
+/* red page variant */
+.navbar--red {
+  background-color: #d50f17;
+  color: var(--color-white);
+}
+
+.navbar--red .navbar__logo {
+  color: var(--color-white);
+}
+
+.navbar--red .navbar__link {
+  color: var(--color-white);
+}
+
+.navbar--red .navbar__link:hover {
+  opacity: 0.6;
+}
+
+.navbar--red .navbar__lang-btn {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar--red .navbar__lang-btn:hover {
+  color: var(--color-white);
+}
+
+.navbar--red .navbar__lang-btn--active {
+  color: var(--color-white);
+}
+
+.navbar--red .navbar__lang-separator {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navbar__links {
+  display: flex;
+  gap: 1.8rem;
+}
+
+.navbar__link {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  text-transform: lowercase;
+  position: relative;
+  transition: opacity 0.2s ease;
+}
+
+.navbar__link:hover {
+  opacity: 0.5;
+}
+
+.navbar__link--active {
+  font-weight: var(--font-weight-medium);
+}
+
+.navbar__language {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.navbar__lang-btn {
+  background: none;
+  border: none;
+  font-family: var(--font-family);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-gray);
+  padding: 0;
+  text-transform: lowercase;
+  transition: color 0.2s ease;
+}
+
+.navbar__lang-btn:hover {
+  color: var(--color-black);
+}
+
+.navbar__lang-btn--active {
+  color: var(--color-black);
+  font-weight: var(--font-weight-medium);
+}
+
+.navbar__lang-separator {
+  color: var(--color-light-gray);
+  font-size: var(--font-size-xs);
+}
+
+@media (max-width: 768px) {
+  .navbar__links {
+    gap: 1rem;
+  }
+
+  .navbar__link {
+    font-size: var(--font-size-xs);
+  }
+}

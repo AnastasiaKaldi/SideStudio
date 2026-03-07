@@ -1,0 +1,128 @@
+.contact {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 8rem var(--content-padding) 4rem;
+}
+
+.contact__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.contact__greeting {
+  font-weight: var(--font-weight-medium);
+}
+
+.contact__cursor {
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.contact__subtitle {
+  text-align: center;
+  font-size: var(--font-size-md);
+  color: var(--color-gray);
+  margin-top: 0.8rem;
+  font-weight: var(--font-weight-light);
+}
+
+.contact__details {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--color-light-gray);
+}
+
+.contact__detail {
+  text-align: center;
+  font-size: var(--font-size-base);
+}
+
+.contact__label {
+  color: var(--color-gray);
+  font-size: var(--font-size-sm);
+}
+
+.contact__email {
+  font-weight: var(--font-weight-medium);
+  border-bottom: 1px solid var(--color-black);
+  padding-bottom: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.contact__email:hover {
+  opacity: 0.6;
+}
+
+.contact__location {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-gray);
+  margin-top: 0.8rem;
+}
+
+.contact__form-section {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact__form-punchline {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-gray);
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact__textarea {
+  width: 100%;
+  padding: 1.2rem;
+  border: 1px solid var(--color-light-gray);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-light);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s ease;
+  cursor: none;
+}
+
+.contact__textarea::placeholder {
+  color: var(--color-light-gray);
+  font-style: italic;
+}
+
+.contact__textarea:focus {
+  border-color: var(--color-black);
+}
+
+.contact__submit {
+  align-self: center;
+  padding: 0.8rem 2.5rem;
+  border: 1px solid var(--color-black);
+  background: none;
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  text-transform: lowercase;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.contact__submit:hover:not(:disabled) {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.contact__submit:disabled {
+  opacity: 0.4;
+}

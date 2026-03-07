@@ -1,0 +1,39 @@
+.custom-cursor {
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-black);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: background-color 0.2s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+}
+
+.custom-cursor--hover {
+  width: 28px;
+  height: 28px;
+  opacity: 0.4;
+}
+
+.custom-cursor--light {
+  background-color: var(--color-white);
+}
+
+/* trailing dot */
+.custom-cursor-trail {
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-black);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  opacity: 0.3;
+  transition: background-color 0.2s ease;
+}
+
+.custom-cursor-trail.custom-cursor--light {
+  background-color: var(--color-white);
+}
