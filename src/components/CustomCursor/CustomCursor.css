@@ -1,39 +1,233 @@
+/* ==========================================
+   CROSSHAIR CURSOR — gapped lines + center dot
+   ========================================== */
+
 .custom-cursor {
-  width: 10px;
-  height: 10px;
-  background-color: var(--color-black);
-  border-radius: 50%;
   position: fixed;
   pointer-events: none;
   z-index: 10000;
-  transform: translate(-50%, -50%);
-  transition: background-color 0.2s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-}
-
-.custom-cursor--hover {
   width: 28px;
   height: 28px;
-  opacity: 0.4;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.custom-cursor--light {
+/* center dot */
+.custom-cursor__dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3px;
+  height: 3px;
+  background-color: var(--color-black);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.3s ease,
+              opacity 0.3s ease;
+}
+
+/* four separate lines with gap in center */
+.custom-cursor__line {
+  position: absolute;
+  background-color: var(--color-black);
+  transition: background-color 0.3s ease,
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.3s ease;
+}
+
+.custom-cursor__line--top {
+  width: 1.5px;
+  height: 8px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.custom-cursor__line--bottom {
+  width: 1.5px;
+  height: 8px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.custom-cursor__line--left {
+  height: 1.5px;
+  width: 8px;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.custom-cursor__line--right {
+  height: 1.5px;
+  width: 8px;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* hover — expand + rotate 45deg */
+.custom-cursor--hover {
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.custom-cursor--hover .custom-cursor__dot {
+  width: 5px;
+  height: 5px;
+}
+
+.custom-cursor--hover .custom-cursor__line--top,
+.custom-cursor--hover .custom-cursor__line--bottom {
+  height: 12px;
+}
+
+.custom-cursor--hover .custom-cursor__line--left,
+.custom-cursor--hover .custom-cursor__line--right {
+  width: 12px;
+}
+
+/* pressed — contract sharply */
+.custom-cursor--pressed {
+  width: 18px;
+  height: 18px;
+}
+
+.custom-cursor--pressed .custom-cursor__dot {
+  width: 4px;
+  height: 4px;
+  background-color: #d50f17;
+}
+
+.custom-cursor--pressed .custom-cursor__line--top,
+.custom-cursor--pressed .custom-cursor__line--bottom {
+  height: 5px;
+}
+
+.custom-cursor--pressed .custom-cursor__line--left,
+.custom-cursor--pressed .custom-cursor__line--right {
+  width: 5px;
+}
+
+.custom-cursor--pressed.custom-cursor--hover {
+  width: 32px;
+  height: 32px;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* light variant */
+.custom-cursor--light .custom-cursor__line {
   background-color: var(--color-white);
 }
 
-/* trailing dot */
+.custom-cursor--light .custom-cursor__dot {
+  background-color: var(--color-white);
+}
+
+.custom-cursor--light.custom-cursor--pressed .custom-cursor__dot {
+  background-color: var(--color-white);
+}
+
+/* ==========================================
+   TRAILING CROSSHAIR — follows with lag
+   ========================================== */
+
 .custom-cursor-trail {
-  width: 6px;
-  height: 6px;
-  background-color: var(--color-black);
-  border-radius: 50%;
   position: fixed;
   pointer-events: none;
   z-index: 9999;
+  width: 48px;
+  height: 48px;
   transform: translate(-50%, -50%);
-  opacity: 0.3;
-  transition: background-color 0.2s ease;
+  opacity: 0.15;
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.4s ease,
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.custom-cursor-trail.custom-cursor--light {
+.custom-cursor-trail__line {
+  position: absolute;
+  background-color: var(--color-black);
+  transition: background-color 0.3s ease,
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.custom-cursor-trail__line--top {
+  width: 1px;
+  height: 14px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.custom-cursor-trail__line--bottom {
+  width: 1px;
+  height: 14px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.custom-cursor-trail__line--left {
+  height: 1px;
+  width: 14px;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.custom-cursor-trail__line--right {
+  height: 1px;
+  width: 14px;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* trail hover — expand + rotate to match */
+.custom-cursor-trail.custom-cursor--hover {
+  width: 64px;
+  height: 64px;
+  opacity: 0.08;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* trail pressed — contract */
+.custom-cursor-trail.custom-cursor--pressed {
+  width: 28px;
+  height: 28px;
+  opacity: 0.25;
+}
+
+.custom-cursor-trail.custom-cursor--pressed .custom-cursor-trail__line--top,
+.custom-cursor-trail.custom-cursor--pressed .custom-cursor-trail__line--bottom {
+  height: 8px;
+}
+
+.custom-cursor-trail.custom-cursor--pressed .custom-cursor-trail__line--left,
+.custom-cursor-trail.custom-cursor--pressed .custom-cursor-trail__line--right {
+  width: 8px;
+}
+
+/* trail light */
+.custom-cursor-trail.custom-cursor--light .custom-cursor-trail__line {
   background-color: var(--color-white);
+}
+
+/* ==========================================
+   HIDE ON MOBILE / TOUCH
+   ========================================== */
+
+@media (max-width: 768px), (pointer: coarse) {
+  .custom-cursor,
+  .custom-cursor-trail {
+    display: none;
+  }
 }
