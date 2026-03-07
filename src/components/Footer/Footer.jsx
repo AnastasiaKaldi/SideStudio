@@ -2,21 +2,21 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import './Footer.css'
 
-const ease = [0.16, 1, 0.3, 1]
+const ease = [0.25, 0.1, 0.25, 1]
 
 const staggerContainer = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.05, delayChildren: 0 },
+    transition: { staggerChildren: 0.14, delayChildren: 0 },
   },
 }
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 10 },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease },
+    transition: { duration: 1.1, ease },
   },
 }
 

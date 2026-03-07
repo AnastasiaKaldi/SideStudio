@@ -1,8 +1,36 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
+import { motion } from 'framer-motion'
 import ProjectCarousel from '../../components/ProjectCarousel/ProjectCarousel'
 import './Landing.css'
+
+const ease = [0.25, 0.1, 0.25, 1]
+
+const flow = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease } },
+}
+
+const flowSoft = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1.1, ease } },
+}
+
+const flowUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1.3, ease } },
+}
+
+const flowScale = {
+  hidden: { opacity: 0, scale: 0.96 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 1.2, ease } },
+}
+
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15 } },
+}
 
 const bentoServices = [
   {
@@ -142,16 +170,32 @@ function Landing() {
 
       {/* HERO */}
       <section className="landing__section landing__section--hero">
-        <div className="landing__hero">
+        <motion.div
+          className="landing__hero"
+          initial={{ opacity: 0, y: 30, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 1.5, ease }}
+        >
           <img src="/hero.png" alt="side creative studio" className="landing__hero-image" />
-        </div>
-        <div className="landing__logo">
+        </motion.div>
+        <motion.div
+          className="landing__logo"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease, delay: 0.5 }}
+        >
           <img src="/logo.png" alt="S/DE" className="landing__logo-image" />
-        </div>
+        </motion.div>
       </section>
 
       {/* VIDEO */}
-      <section className="landing__section landing__section--video">
+      <motion.section
+        className="landing__section landing__section--video"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={flowScale}
+      >
         <video
           className="landing__video"
           src="/video.mp4"
@@ -161,27 +205,33 @@ function Landing() {
           playsInline
           preload="metadata"
         />
-      </section>
+      </motion.section>
 
       {/* INTRO */}
       <section className="landing__section landing__section--intro">
-        <div className="landing__intro">
-          <h2 className="landing__intro-headline">
+        <motion.div
+          className="landing__intro"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={stagger}
+        >
+          <motion.h2 className="landing__intro-headline" variants={flowUp}>
             Side Creative Studio is a dynamic platform showcasing a diverse and captivating creative portfolio.
-          </h2>
-          <p>
+          </motion.h2>
+          <motion.p variants={flowSoft}>
             Based in a vibrant city, we are passionate about transforming concepts into compelling visual narratives through our expertise in art direction, photography, and styling.
-          </p>
-          <p>
+          </motion.p>
+          <motion.p variants={flowSoft}>
             Our visual storytelling is a testament to our commitment to delivering pure visual language that resonates with the audience.
-          </p>
+          </motion.p>
 
-          <div className="landing__intro-about">
+          <motion.div className="landing__intro-about" variants={flowSoft}>
             <span className="section-label">about</span>
             <Link to="/about" className="landing__intro-link">read more</Link>
-          </div>
+          </motion.div>
 
-          <div className="landing__intro-cards">
+          <motion.div className="landing__intro-cards" variants={flowSoft}>
             <div className="landing__intro-card-wrapper">
               <Link to="/about" className="flip-card">
                 <div className="flip-card__inner">
@@ -211,30 +261,42 @@ function Landing() {
                 </div>
               </Link>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* WHAT WE DO */}
       <section className="landing__section landing__section--projects">
-        <div className="landing__projects-header">
-          <span className="section-label">what we do</span>
-          <p className="landing__projects-subtitle">
+        <motion.div
+          className="landing__projects-header"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={stagger}
+        >
+          <motion.span className="section-label" variants={flow}>what we do</motion.span>
+          <motion.p className="landing__projects-subtitle" variants={flow}>
             a selection of projects we've brought to life.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         <ProjectCarousel />
       </section>
 
       {/* SERVICES BENTO GRID */}
       <section id="services" className="landing__section landing__section--services">
-        <div className="services-bento__header">
-          <span className="section-label">our services</span>
-          <p className="services-bento__subtitle">
+        <motion.div
+          className="services-bento__header"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={stagger}
+        >
+          <motion.span className="section-label" variants={flow}>our services</motion.span>
+          <motion.p className="services-bento__subtitle" variants={flow}>
             what we do and how we help brands grow.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         <div className="services-bento">
           <div className="services-bento__grid">
@@ -274,11 +336,23 @@ function Landing() {
 
       {/* CONTACT — POSTCARD */}
       <section id="contact" className="landing__section landing__section--contact">
-        <div className="contact-header">
+        <motion.div
+          className="contact-header"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={flow}
+        >
           <span className="section-label">contact us</span>
-        </div>
+        </motion.div>
 
-        <div className="postcard">
+        <motion.div
+          className="postcard"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 1.3, ease }}
+        >
           {/* left side — message */}
           <div className="postcard__left">
             <h2 className="postcard__heading">
@@ -344,7 +418,7 @@ function Landing() {
               </button>
             </form>
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   )

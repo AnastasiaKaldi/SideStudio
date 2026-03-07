@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import AboutFooter from '../../components/AboutFooter/AboutFooter'
 import './About.css'
 
-const ease = [0.16, 1, 0.3, 1]
+const ease = [0.25, 0.1, 0.25, 1]
 
 function About() {
   useEffect(() => {
@@ -22,9 +22,9 @@ function About() {
       <section className="about__welcome">
         <motion.h1
           className="about__title"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease }}
+          transition={{ duration: 1.4, ease }}
         >
           Welcome to Side Creative Studio
         </motion.h1>
@@ -37,9 +37,9 @@ function About() {
           ].map((text, i) => (
             <motion.p
               key={i}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease, delay: 0.15 + i * 0.08 }}
+              transition={{ duration: 1.2, ease, delay: 0.3 + i * 0.15 }}
             >
               {text}
             </motion.p>
@@ -48,9 +48,9 @@ function About() {
 
         <motion.div
           className="about__signature"
-          initial={{ opacity: 0, x: 15 }}
+          initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, ease, delay: 0.4 }}
+          transition={{ duration: 1.2, ease, delay: 0.6 }}
         >
           <img src="/doublens.png" alt="by the double N's" className="about__signature-img" loading="lazy" />
         </motion.div>
@@ -66,18 +66,18 @@ function About() {
             viewport={{ once: true, amount: 0.3 }}
             variants={{
               hidden: {},
-              visible: { transition: { staggerChildren: 0.06, delayChildren: 0 } },
+              visible: { transition: { staggerChildren: 0.14, delayChildren: 0 } },
             }}
           >
             <motion.h2
               className="about__person-name"
               variants={{
-                hidden: { opacity: 0, x: -15, letterSpacing: '0.15em' },
+                hidden: { opacity: 0, x: -30, letterSpacing: '0.15em' },
                 visible: {
                   opacity: 1,
                   x: 0,
                   letterSpacing: '0.05em',
-                  transition: { duration: 0.5, ease },
+                  transition: { duration: 1.2, ease },
                 },
               }}
             >
@@ -93,8 +93,8 @@ function About() {
                 <motion.p
                   key={i}
                   variants={{
-                    hidden: { opacity: 0, y: 10 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease } },
+                    hidden: { opacity: 0, y: 30 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 1.1, ease } },
                   }}
                 >
                   {text}
@@ -117,18 +117,18 @@ function About() {
             viewport={{ once: true, amount: 0.3 }}
             variants={{
               hidden: {},
-              visible: { transition: { staggerChildren: 0.06, delayChildren: 0 } },
+              visible: { transition: { staggerChildren: 0.14, delayChildren: 0 } },
             }}
           >
             <motion.h2
               className="about__person-name"
               variants={{
-                hidden: { opacity: 0, x: 15, letterSpacing: '0.15em' },
+                hidden: { opacity: 0, x: 30, letterSpacing: '0.15em' },
                 visible: {
                   opacity: 1,
                   x: 0,
                   letterSpacing: '0.05em',
-                  transition: { duration: 0.5, ease },
+                  transition: { duration: 1.2, ease },
                 },
               }}
             >
@@ -144,8 +144,8 @@ function About() {
                 <motion.p
                   key={i}
                   variants={{
-                    hidden: { opacity: 0, y: 10 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease } },
+                    hidden: { opacity: 0, y: 30 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 1.1, ease } },
                   }}
                 >
                   {text}
