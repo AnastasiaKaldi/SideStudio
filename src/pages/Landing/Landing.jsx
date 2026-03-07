@@ -1,56 +1,98 @@
-import { useState, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
+import ProjectCarousel from '../../components/ProjectCarousel/ProjectCarousel'
 import './Landing.css'
 
-const services = [
+const serviceCards = [
   {
     id: 1,
     title: 'creative direction',
     description: 'shaping the core idea behind a brand\'s visual and communication output across all channels.',
-    image: '/service-creative.jpg',
   },
   {
     id: 2,
     title: 'content creation',
     description: 'original visual content from concept to post-production — photography, videography, and design.',
-    image: '/service-content.jpg',
   },
   {
     id: 3,
     title: 'strategy & planning',
     description: 'monthly planning aligned with brand goals — content calendars, campaigns, and kpis.',
-    image: '/service-strategy.jpg',
   },
   {
     id: 4,
     title: 'social media',
     description: 'end-to-end management of your digital presence — content, community, and growth.',
-    image: '/service-social.jpg',
   },
 ]
 
-const projects = [
-  { id: 1, title: 'brand identity', description: 'a complete visual identity built from scratch — logo, color system, typography, and brand guidelines that set the tone for everything that followed.' },
-  { id: 2, title: 'campaign shoot', description: 'a full-day production with art direction, styling, and photography — delivering a library of assets ready for social, web, and print.' },
-  { id: 3, title: 'social strategy', description: 'a 6-month content strategy that redefined the brand\'s online voice — from planning to execution, resulting in consistent growth and engagement.' },
-  { id: 4, title: 'visual storytelling', description: 'a series of short-form videos and photo narratives crafted to communicate the brand\'s values through emotion and atmosphere.' },
-  { id: 5, title: 'product launch', description: 'end-to-end creative direction for a product launch — concept, content production, paid campaigns, and performance tracking.' },
-  { id: 6, title: 'editorial design', description: 'a print and digital editorial project blending photography, layout design, and copywriting into a cohesive visual narrative.' },
-  { id: 7, title: 'art direction', description: 'shaping the creative vision behind a brand\'s visual output — from mood and tone to final execution across all touchpoints.' },
+const bentoServices = [
+  {
+    id: 1,
+    title: 'social media management',
+    brief: 'end-to-end management of your digital presence.',
+    description: 'we handle content strategy, content creation, planning and posting schedules, captions, community management, and performance tracking — ensuring consistent communication and measurable growth across platforms.',
+    size: 'tall',
+  },
+  {
+    id: 2,
+    title: 'content creation',
+    brief: 'original visual content from concept to post-production.',
+    description: 'from concept development and moodboard preparation to photography, videography, and full post-production, we create visual assets ready for immediate use across social media, websites, and paid campaigns.',
+    size: 'wide',
+  },
+  {
+    id: 3,
+    title: 'strategy & planning',
+    brief: 'monthly planning aligned with brand goals.',
+    description: 'includes content calendars, campaign planning, positioning strategy, and clearly defined kpis to guide consistent growth and communication.',
+    size: 'normal',
+  },
+  {
+    id: 4,
+    title: 'creative direction',
+    brief: 'shaping the core idea behind a brand\'s visual output.',
+    description: 'from defining the visual language to translating strategy into creative executions, we ensure that content, campaigns, and design assets remain aligned and coherent across all channels.',
+    size: 'large',
+  },
+  {
+    id: 5,
+    title: 'design thinking',
+    brief: 'branded assets that support consistent communication.',
+    description: 'creation of essential branded assets including social media visuals, story templates, promotional graphics, and layout elements that support consistent brand communication.',
+    size: 'normal',
+  },
+  {
+    id: 6,
+    title: 'ads & reporting',
+    brief: 'paid media campaigns, optimized and tracked.',
+    description: 'we handle audience targeting, budget allocation, creative alignment, and tracking configuration. monthly reporting includes performance analysis, key insights, and actionable recommendations to improve results.',
+    size: 'tall',
+  },
+  {
+    id: 7,
+    title: 'brand development',
+    brief: 'building brands from the ground up.',
+    description: 'from naming and visual identity to tone of voice and brand guidelines — we lay the foundation for brands that feel intentional, consistent, and ready to grow.',
+    size: 'tall',
+  },
+  {
+    id: 8,
+    title: 'consulting',
+    brief: 'advisory sessions for brand growth.',
+    description: 'clear feedback, structured guidance, and practical next steps tailored to your brand\'s needs — covering brand positioning, content strategy, digital presence, and performance optimization.',
+    size: 'wide',
+  },
+]
+
+const greetings = [
+  'hello', 'hola', 'bonjour', 'ciao', 'hallo',
+  'olá', 'merhaba', 'ahoj', 'hej', 'namaste',
 ]
 
 const ease = [0.16, 1, 0.3, 1]
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (delay = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease, delay },
-  }),
-}
 
 const staggerContainer = {
   hidden: {},
@@ -69,19 +111,60 @@ const staggerItem = {
 }
 
 function Landing() {
-  const [hoveredProject, setHoveredProject] = useState(null)
-  const [activeProject, setActiveProject] = useState(null)
-  const expandedRef = useRef(null)
+  const location = useLocation()
+  const [flippedId, setFlippedId] = useState(null)
 
-  const handleProjectClick = (project) => {
-    if (activeProject?.id === project.id) {
-      setActiveProject(null)
-    } else {
-      setActiveProject(project)
+  // scroll to hash on mount (e.g. from /about clicking "services" in nav)
+  useEffect(() => {
+    if (location.hash) {
       setTimeout(() => {
-        expandedRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        const el = document.querySelector(location.hash)
+        if (el) el.scrollIntoView({ behavior: 'smooth' })
       }, 100)
     }
+  }, [location.hash])
+
+  // contact greeting typewriter
+  const [greeting, setGreeting] = useState('')
+  const [greetingIndex, setGreetingIndex] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [formMessage, setFormMessage] = useState('')
+  const [isSending, setIsSending] = useState(false)
+  const formRef = useRef(null)
+
+  useEffect(() => {
+    const word = greetings[greetingIndex]
+    const timeout = isDeleting ? 50 : 100
+
+    if (!isDeleting && greeting === word) {
+      const t = setTimeout(() => setIsDeleting(true), 2000)
+      return () => clearTimeout(t)
+    }
+
+    if (isDeleting && greeting === '') {
+      setIsDeleting(false)
+      setGreetingIndex((prev) => (prev + 1) % greetings.length)
+      return
+    }
+
+    const timer = setTimeout(() => {
+      setGreeting(
+        isDeleting
+          ? word.substring(0, greeting.length - 1)
+          : word.substring(0, greeting.length + 1)
+      )
+    }, timeout)
+
+    return () => clearTimeout(timer)
+  }, [greeting, isDeleting, greetingIndex])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (!formMessage.trim()) return
+    setIsSending(true)
+    const mailtoLink = `mailto:sidecreativestudio@gmail.com?subject=new inquiry&body=${encodeURIComponent(formMessage)}`
+    window.location.href = mailtoLink
+    setTimeout(() => setIsSending(false), 1000)
   }
 
   return (
@@ -187,11 +270,11 @@ function Landing() {
         </motion.div>
       </section>
 
-      {/* SERVICES CAROUSEL */}
-      <section className="landing__section landing__section--services">
-        <div className="services-carousel">
+      {/* WHAT WE DO */}
+      <section className="landing__section landing__section--projects">
+        <div className="landing__projects-header">
           <motion.h2
-            className="services-carousel__title"
+            className="landing__projects-title"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
@@ -200,7 +283,7 @@ function Landing() {
             what we do
           </motion.h2>
           <motion.p
-            className="services-carousel__subtitle"
+            className="landing__projects-subtitle"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
@@ -208,100 +291,12 @@ function Landing() {
           >
             a selection of projects we've brought to life.
           </motion.p>
-
-          <div className="services-carousel__track-wrapper">
-            <motion.div
-              className="services-carousel__track"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={{
-                hidden: {},
-                visible: { transition: { staggerChildren: 0.08, delayChildren: 0.3 } },
-              }}
-            >
-              {projects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  className={`services-carousel__item ${activeProject?.id === project.id ? 'services-carousel__item--active' : ''} ${hoveredProject && hoveredProject !== project.id ? 'services-carousel__item--dimmed' : ''}`}
-                  variants={{
-                    hidden: { opacity: 0, y: 40 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease } },
-                  }}
-                  onMouseEnter={() => setHoveredProject(project.id)}
-                  onMouseLeave={() => setHoveredProject(null)}
-                  onClick={() => handleProjectClick(project)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <motion.div
-                    className="services-carousel__image"
-                    whileHover={{ y: -8 }}
-                    transition={{ duration: 0.4, ease }}
-                  >
-                    <div className="services-carousel__image-overlay" />
-                    <span className="services-carousel__number">{String(index + 1).padStart(2, '0')}</span>
-                  </motion.div>
-                  <div className="services-carousel__item-footer">
-                    <span className="services-carousel__label">{project.title}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-
-          <AnimatePresence>
-            {activeProject && (
-              <motion.div
-                ref={expandedRef}
-                className="services-carousel__expanded"
-                key={activeProject.id}
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.5, ease }}
-              >
-                <div className="services-carousel__expanded-inner">
-                  <div className="services-carousel__expanded-image">
-                    <div className="services-carousel__expanded-image-bg" />
-                    <span className="services-carousel__expanded-number">
-                      {String(activeProject.id).padStart(2, '0')}
-                    </span>
-                  </div>
-                  <div className="services-carousel__expanded-text">
-                    <motion.h3
-                      className="services-carousel__expanded-title"
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, ease, delay: 0.15 }}
-                    >
-                      {activeProject.title}
-                    </motion.h3>
-                    <motion.p
-                      className="services-carousel__expanded-description"
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.5, ease, delay: 0.25 }}
-                    >
-                      {activeProject.description}
-                    </motion.p>
-                    <motion.button
-                      className="services-carousel__expanded-close"
-                      onClick={() => setActiveProject(null)}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.3, delay: 0.35 }}
-                    >
-                      close
-                    </motion.button>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
+
+        <ProjectCarousel />
       </section>
 
-      {/* SERVICES CARDS */}
+      {/* SERVICES CARDS (landing teaser) */}
       <section className="landing__section landing__section--service-cards">
         <motion.div
           className="service-cards"
@@ -324,7 +319,7 @@ function Landing() {
               visible: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
             }}
           >
-            {services.map((service) => (
+            {serviceCards.map((service) => (
               <motion.div
                 key={service.id}
                 className="service-card"
@@ -341,13 +336,154 @@ function Landing() {
                   <div className="service-card__back">
                     <h3 className="service-card__back-title">{service.title}</h3>
                     <p className="service-card__back-text">{service.description}</p>
-                    <Link to="/services" className="service-card__back-cta">
+                    <a href="#services" className="service-card__back-cta">
                       learn more &rarr;
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </motion.div>
             ))}
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* SERVICES BENTO GRID */}
+      <section id="services" className="landing__section landing__section--services">
+        <motion.div
+          className="services-bento"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={staggerContainer}
+        >
+          <motion.h2 className="services-bento__title" variants={staggerItem}>
+            our services
+          </motion.h2>
+          <motion.p className="services-bento__subtitle" variants={staggerItem}>
+            what we do and how we help brands grow.
+          </motion.p>
+
+          <motion.div
+            className="services-bento__grid"
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.08, delayChildren: 0.2 } },
+            }}
+          >
+            {bentoServices.map((service) => (
+              <motion.div
+                key={service.id}
+                className={`services-bento__card services-bento__card--${service.size} ${flippedId === service.id ? 'services-bento__card--flipped' : ''}`}
+                variants={{
+                  hidden: { opacity: 0, y: 40 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
+                }}
+                onClick={() => setFlippedId(flippedId === service.id ? null : service.id)}
+              >
+                <div className="services-bento__card-inner">
+                  <div className="services-bento__card-front">
+                    <div className="services-bento__card-image" />
+                    <div className="services-bento__card-overlay">
+                      <span className="services-bento__card-number">{String(service.id).padStart(2, '0')}</span>
+                      <h3 className="services-bento__card-title">{service.title}</h3>
+                    </div>
+                  </div>
+                  <div className="services-bento__card-back">
+                    <span className="services-bento__card-number">{String(service.id).padStart(2, '0')}</span>
+                    <h3 className="services-bento__card-back-title">{service.title}</h3>
+                    <p className="services-bento__card-back-brief">{service.brief}</p>
+                    <p className="services-bento__card-back-description">{service.description}</p>
+                    <a
+                      href="#contact"
+                      className="services-bento__card-back-cta"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      get in touch &rarr;
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* CONTACT — POSTCARD */}
+      <section id="contact" className="landing__section landing__section--contact">
+        <motion.div
+          className="postcard"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={staggerContainer}
+        >
+          {/* left side — message */}
+          <motion.div className="postcard__left" variants={staggerItem}>
+            <h2 className="postcard__heading">
+              let's connect, say <span className="postcard__greeting">{greeting}<span className="postcard__cursor">|</span></span> to us.
+            </h2>
+            <p className="postcard__message">
+              need to speak to someone right away? feel free to contact us using the form — or just say hello. we'd love to hear from you.
+            </p>
+            <div className="postcard__from">
+              <p className="postcard__from-label">from athens, with love.</p>
+              <a href="mailto:sidecreativestudio@gmail.com" className="postcard__email">
+                sidecreativestudio@gmail.com
+              </a>
+            </div>
+          </motion.div>
+
+          {/* divider */}
+          <div className="postcard__divider" />
+
+          {/* right side — address / form */}
+          <motion.div className="postcard__right" variants={staggerItem}>
+            <div className="postcard__stamp">
+              <img src="/doublensRed.png" alt="by the double N's" className="postcard__stamp-img" />
+            </div>
+
+            <form
+              className="postcard__form"
+              ref={formRef}
+              onSubmit={handleSubmit}
+            >
+              <div className="postcard__field">
+                <input
+                  type="text"
+                  className="postcard__input"
+                  placeholder="name"
+                  required
+                />
+              </div>
+              <div className="postcard__field">
+                <input
+                  type="email"
+                  className="postcard__input"
+                  placeholder="email"
+                  required
+                />
+              </div>
+              <div className="postcard__field">
+                <textarea
+                  className="postcard__input postcard__input--textarea"
+                  value={formMessage}
+                  onChange={(e) => setFormMessage(e.target.value)}
+                  placeholder="message"
+                  rows={4}
+                />
+              </div>
+
+              <motion.button
+                type="submit"
+                className="postcard__submit"
+                disabled={isSending || !formMessage.trim()}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.2 }}
+              >
+                {isSending ? 'sending...' : 'send'}
+              </motion.button>
+            </form>
           </motion.div>
         </motion.div>
       </section>

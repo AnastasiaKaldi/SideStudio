@@ -1,0 +1,205 @@
+.project-carousel {
+  width: 100%;
+}
+
+/* track */
+.project-carousel__track-wrapper {
+  position: relative;
+}
+
+.project-carousel__track {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.project-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* individual items */
+.project-carousel__item {
+  flex: 0 0 200px;
+  scroll-snap-align: start;
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family);
+  position: relative;
+}
+
+.project-carousel__item--dimmed {
+  opacity: 0.3 !important;
+  transform: scale(0.98);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.project-carousel__item--active .project-carousel__image {
+  outline: 2px solid var(--color-black);
+  outline-offset: -2px;
+}
+
+.project-carousel__item--active .project-carousel__label {
+  color: var(--color-black);
+}
+
+/* image */
+.project-carousel__image {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background-color: var(--color-light-gray);
+  position: relative;
+  overflow: hidden;
+}
+
+.project-carousel__image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 40%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.project-carousel__item:hover .project-carousel__image-overlay {
+  opacity: 1;
+}
+
+.project-carousel__number {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-light);
+  color: rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.1em;
+  transition: color 0.3s ease;
+}
+
+.project-carousel__item:hover .project-carousel__number {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* footer */
+.project-carousel__item-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 0.5rem;
+}
+
+.project-carousel__label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  text-transform: lowercase;
+  color: var(--color-gray);
+  transition: color 0.3s ease;
+}
+
+.project-carousel__item:hover .project-carousel__label {
+  color: var(--color-black);
+}
+
+/* expanded view */
+.project-carousel__expanded {
+  overflow: hidden;
+  margin-top: 3rem;
+}
+
+.project-carousel__expanded-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  padding: 2rem 0;
+  max-width: 900px;
+}
+
+.project-carousel__expanded-image {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background-color: var(--color-light-gray);
+  position: relative;
+  overflow: hidden;
+}
+
+.project-carousel__expanded-image-bg {
+  width: 100%;
+  height: 100%;
+}
+
+.project-carousel__expanded-number {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-light);
+  color: rgba(0, 0, 0, 0.25);
+  letter-spacing: 0.1em;
+}
+
+.project-carousel__expanded-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding-top: 1rem;
+}
+
+.project-carousel__expanded-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  text-transform: lowercase;
+}
+
+.project-carousel__expanded-description {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-light);
+  line-height: 1.8;
+  color: var(--color-gray);
+}
+
+.project-carousel__expanded-close {
+  align-self: flex-start;
+  margin-top: 1rem;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid var(--color-black);
+  background: none;
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  text-transform: lowercase;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.project-carousel__expanded-close:hover {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+@media (max-width: 768px) {
+  .project-carousel__item {
+    flex: 0 0 160px;
+  }
+
+  .project-carousel__expanded-inner {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .project-carousel__expanded-title {
+    font-size: var(--font-size-md);
+  }
+
+  .project-carousel__expanded-description {
+    font-size: var(--font-size-sm);
+  }
+}

@@ -87,7 +87,7 @@ function Portfolio() {
       <div className="portfolio__footer-cta">
         <p className="portfolio__closing">good work usually starts with a conversation.</p>
         <p className="portfolio__closing">if you're thinking about your brand's next step, we'd love to hear about it.</p>
-        <Link to="/contact" className="portfolio__cta">— get in touch</Link>
+        <a href="/#contact" className="portfolio__cta">— get in touch</a>
       </div>
     </div>
   )

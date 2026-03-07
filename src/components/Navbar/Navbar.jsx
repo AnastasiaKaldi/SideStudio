@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useLanguage } from '../../context/LanguageContext'
 import { motion } from 'framer-motion'
 import './Navbar.css'
@@ -8,14 +8,31 @@ const redPages = ['/about']
 
 const ease = [0.16, 1, 0.3, 1]
 
+const navLinks = [
+  { label: 'about', to: '/about' },
+  { label: 'services', anchor: '#services' },
+  { label: 'contact', anchor: '#contact' },
+]
+
 function Navbar() {
   const { language, setLanguage, handleLanguageHover } = useLanguage()
   const location = useLocation()
+  const navigate = useNavigate()
   const isRedPage = redPages.includes(location.pathname)
   const isHome = location.pathname === '/'
   const [menuOpen, setMenuOpen] = useState(false)
 
   const closeMenu = () => setMenuOpen(false)
+
+  const handleAnchorClick = (anchor) => {
+    closeMenu()
+    if (isHome) {
+      const el = document.querySelector(anchor)
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      navigate('/' + anchor)
+    }
+  }
 
   return (
     <motion.nav
@@ -45,20 +62,29 @@ function Navbar() {
 
         <div className={`navbar__right ${menuOpen ? 'navbar__right--open' : ''}`}>
           <div className="navbar__links">
-            {['about', 'services', 'contact'].map((link, i) => (
+            {navLinks.map((link, i) => (
               <motion.div
-                key={link}
+                key={link.label}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease, delay: 0.3 + i * 0.08 }}
               >
-                <NavLink
-                  to={`/${link}`}
-                  className={({ isActive }) => isActive ? 'navbar__link navbar__link--active' : 'navbar__link'}
-                  onClick={closeMenu}
-                >
-                  {link}
-                </NavLink>
+                {link.to ? (
+                  <NavLink
+                    to={link.to}
+                    className={({ isActive }) => isActive ? 'navbar__link navbar__link--active' : 'navbar__link'}
+                    onClick={closeMenu}
+                  >
+                    {link.label}
+                  </NavLink>
+                ) : (
+                  <button
+                    className="navbar__link navbar__link--anchor"
+                    onClick={() => handleAnchorClick(link.anchor)}
+                  >
+                    {link.label}
+                  </button>
+                )}
               </motion.div>
             ))}
           </div>

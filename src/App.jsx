@@ -6,8 +6,6 @@ import CustomCursor from './components/CustomCursor/CustomCursor'
 import LanguageOverlay from './components/LanguageOverlay/LanguageOverlay'
 import Landing from './pages/Landing/Landing'
 import About from './pages/About/About'
-import Services from './pages/Services/Services'
-import Contact from './pages/Contact/Contact'
 import { LanguageProvider } from './context/LanguageContext'
 import './App.css'
 
@@ -40,8 +38,6 @@ function AppContent() {
             <Routes location={location}>
               <Route path="/" element={<Landing />} />
               <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/contact" element={<Contact />} />
             </Routes>
           </motion.div>
         </AnimatePresence>

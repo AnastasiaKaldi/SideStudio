@@ -37,8 +37,8 @@ function AboutFooter() {
         <motion.div className="about-footer__nav" variants={fadeUp}>
           <div className="about-footer__nav-group">
             <Link to="/about" className="about-footer__nav-link">about</Link>
-            <Link to="/services" className="about-footer__nav-link">services</Link>
-            <Link to="/contact" className="about-footer__nav-link">contact</Link>
+            <a href="/#services" className="about-footer__nav-link">services</a>
+            <a href="/#contact" className="about-footer__nav-link">contact</a>
           </div>
 
           <div className="about-footer__nav-group">
