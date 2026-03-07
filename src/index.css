@@ -48,12 +48,14 @@
 html {
   scroll-behavior: smooth;
   cursor: none;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
   cursor: none;
+  overflow-x: hidden;
 }
 
 a {
@@ -88,7 +90,7 @@ h3 {
 }
 
 p {
-  text-align: justify;
+  text-align: left;
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-light);
   line-height: 1.8;
