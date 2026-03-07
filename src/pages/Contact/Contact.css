@@ -9,6 +9,10 @@
   margin-bottom: 3rem;
 }
 
+.contact__header h1 {
+  font-size: var(--font-size-xl);
+}
+
 .contact__greeting {
   font-weight: var(--font-weight-medium);
 }
@@ -125,4 +129,25 @@
 
 .contact__submit:disabled {
   opacity: 0.4;
+}
+
+@media (max-width: 768px) {
+  .contact {
+    padding: 5rem var(--content-padding) 3rem;
+  }
+
+  .contact__header h1 {
+    font-size: var(--font-size-lg);
+  }
+
+  .contact__textarea {
+    cursor: auto;
+    font-size: var(--font-size-sm);
+    padding: 1rem;
+  }
+
+  .contact__submit {
+    font-size: var(--font-size-sm);
+    padding: 0.7rem 2rem;
+  }
 }
