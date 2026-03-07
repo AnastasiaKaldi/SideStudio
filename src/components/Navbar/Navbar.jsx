@@ -8,14 +8,8 @@ const redPages = ['/about']
 
 const ease = [0.25, 0.1, 0.25, 1]
 
-const navLinks = [
-  { label: 'about', to: '/about' },
-  { label: 'services', anchor: '#services' },
-  { label: 'contact', anchor: '#contact' },
-]
-
 function Navbar() {
-  const { language, setLanguage, handleLanguageHover } = useLanguage()
+  const { language, setLanguage, t, handleLanguageHover } = useLanguage()
   const location = useLocation()
   const navigate = useNavigate()
   const isRedPage = redPages.includes(location.pathname)
@@ -23,6 +17,12 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const closeMenu = () => setMenuOpen(false)
+
+  const navLinks = [
+    { label: t('navAbout'), to: '/about' },
+    { label: t('navServices'), anchor: '#services' },
+    { label: t('navContact'), anchor: '#contact' },
+  ]
 
   const handleAnchorClick = (anchor) => {
     closeMenu()

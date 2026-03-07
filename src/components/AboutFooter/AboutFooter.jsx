@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useLanguage } from '../../context/LanguageContext'
 import './AboutFooter.css'
 
 const ease = [0.25, 0.1, 0.25, 1]
@@ -21,6 +22,8 @@ const fadeUp = {
 }
 
 function AboutFooter() {
+  const { t } = useLanguage()
+
   return (
     <motion.footer
       className="about-footer"
@@ -36,13 +39,13 @@ function AboutFooter() {
 
         <motion.div className="about-footer__nav" variants={fadeUp}>
           <div className="about-footer__nav-group">
-            <Link to="/about" className="about-footer__nav-link">about</Link>
-            <a href="/#services" className="about-footer__nav-link">services</a>
-            <a href="/#contact" className="about-footer__nav-link">contact</a>
+            <Link to="/about" className="about-footer__nav-link">{t('navAbout')}</Link>
+            <a href="/#services" className="about-footer__nav-link">{t('navServices')}</a>
+            <a href="/#contact" className="about-footer__nav-link">{t('navContact')}</a>
           </div>
 
           <div className="about-footer__nav-group">
-            <span className="about-footer__nav-title">you can stalk us here</span>
+            <span className="about-footer__nav-title">{t('footerStalk')}</span>
             <a href="#" className="about-footer__nav-link">instagram</a>
             <a href="#" className="about-footer__nav-link">pinterest</a>
             <a href="#" className="about-footer__nav-link">linkedin</a>
@@ -50,12 +53,12 @@ function AboutFooter() {
         </motion.div>
 
         <motion.div className="about-footer__legal" variants={fadeUp}>
-          <a href="#" className="about-footer__legal-link">privacy policy</a>
-          <a href="#" className="about-footer__legal-link">terms & conditions</a>
+          <a href="#" className="about-footer__legal-link">{t('footerPrivacy')}</a>
+          <a href="#" className="about-footer__legal-link">{t('footerTerms')}</a>
         </motion.div>
 
         <motion.div className="about-footer__bottom" variants={fadeUp}>
-          <span className="about-footer__copyright">all rights reserved</span>
+          <span className="about-footer__copyright">{t('footerCopyright')}</span>
         </motion.div>
       </div>
     </motion.footer>

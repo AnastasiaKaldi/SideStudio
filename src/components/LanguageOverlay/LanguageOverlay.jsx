@@ -9,7 +9,7 @@ function LanguageOverlay() {
   return (
     <div className="language-overlay" onClick={switchToEnglish}>
       <div className="language-overlay__content">
-        <p className="language-overlay__message">for the international crowd</p>
+        <p className="language-overlay__message">switching to english</p>
       </div>
     </div>
   )

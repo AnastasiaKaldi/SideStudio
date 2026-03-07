@@ -2,6 +2,7 @@
   background-color: #d50f17;
   color: var(--color-white);
   padding: 4rem var(--content-padding) 2rem;
+  margin-top: 12rem;
 }
 
 .about-footer__inner {

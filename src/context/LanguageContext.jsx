@@ -1,10 +1,15 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useCallback } from 'react'
+import translations from '../translations'
 
 const LanguageContext = createContext()
 
 export function LanguageProvider({ children }) {
-  const [language, setLanguage] = useState('gr')
+  const [language, setLanguage] = useState('en')
   const [showOverlay, setShowOverlay] = useState(false)
+
+  const t = useCallback((key) => {
+    return translations[language]?.[key] ?? translations.en[key] ?? key
+  }, [language])
 
   const handleLanguageHover = () => {
     if (language === 'gr') {
@@ -25,6 +30,7 @@ export function LanguageProvider({ children }) {
     <LanguageContext.Provider value={{
       language,
       setLanguage,
+      t,
       showOverlay,
       handleLanguageHover,
       switchToEnglish,

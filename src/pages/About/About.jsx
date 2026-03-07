@@ -1,12 +1,15 @@
 import { useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { motion } from 'framer-motion'
+import { useLanguage } from '../../context/LanguageContext'
 import AboutFooter from '../../components/AboutFooter/AboutFooter'
 import './About.css'
 
 const ease = [0.25, 0.1, 0.25, 1]
 
 function About() {
+  const { t } = useLanguage()
+
   useEffect(() => {
     document.body.classList.add('about-page')
     return () => document.body.classList.remove('about-page')
@@ -15,8 +18,8 @@ function About() {
   return (
     <div className="about">
       <Helmet>
-        <title>about | side studio</title>
-        <meta name="description" content="Born as a side project, built with intention. Side Studio is a creative space shaping contemporary brands at the intersection of creative direction, cohesive content, and intentional design." />
+        <title>{t('aboutPageTitle')}</title>
+        <meta name="description" content={t('aboutPageDescription')} />
       </Helmet>
 
       <section className="about__welcome">
@@ -26,15 +29,11 @@ function About() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.4, ease }}
         >
-          Welcome to Side Creative Studio
+          {t('aboutTitle')}
         </motion.h1>
 
         <div className="about__text-block">
-          {[
-            'Welcome to Side Creative Studio, where creativity knows no bounds. Our studio is a dynamic space where ideas come to life and imagination takes center stage. We are passionate about crafting compelling visual stories that resonate with audiences, and we believe in the power of design to make a lasting impact.',
-            "At Side Creative Studio, we don't just create; we collaborate.",
-            "Our team is dedicated to understanding your vision and bringing it to fruition. Whether you're a startup, a small business, or a global brand, we're here to elevate your brand presence and deliver outstanding creative solutions. This is where creativity meets innovation, and we're excited to embark on this creative journey with you.",
-          ].map((text, i) => (
+          {t('aboutTexts').map((text, i) => (
             <motion.p
               key={i}
               initial={{ opacity: 0, y: 30 }}
@@ -81,15 +80,11 @@ function About() {
                 },
               }}
             >
-              NIKOLAOS
+              {t('aboutNikosName')}
             </motion.h2>
 
             <div className="about__person-bio">
-              {[
-                'Nikos sees creation as a quiet release from the limits of logic. A way for thought to move freely, without needing permission or explanation.',
-                'Rooted in surrealism, he believes thought finds its purest form when control recedes and perception drifts through instinct, dreams, and the subconscious, allowing meaning to come into focus.',
-                'Through this perspective, creativity is a way of experiencing the world beyond the obvious, where the unconscious speaks freely and imagination uncovers truths deeper than logic, translating feeling into form.',
-              ].map((text, i) => (
+              {t('aboutNikosBio').map((text, i) => (
                 <motion.p
                   key={i}
                   variants={{
@@ -103,9 +98,15 @@ function About() {
             </div>
           </motion.div>
 
-          <div className="about__person-image">
+          <motion.div
+            className="about__person-image"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 1.3, ease }}
+          >
             <img src="/aboutpagenikos.jpg" alt="nikolaos" loading="lazy" />
-          </div>
+          </motion.div>
         </div>
 
         {/* NIKOLETA */}
@@ -132,15 +133,11 @@ function About() {
                 },
               }}
             >
-              NIKOLETA
+              {t('aboutNikolName')}
             </motion.h2>
 
             <div className="about__person-bio">
-              {[
-                "Nikol is drawn to authenticity. Her thinking is grounded in structure, strategy, and the technical side of marketing and photography.",
-                "She's obsessed with aesthetics, but lives for the tension between logic and imagination. That extreme balance is what excites her — what keeps her awake at night, already chasing what's coming next.",
-                "A natural observer, she treats the world as an endless source of reference and inspiration. In her mind, creativity blends seamlessly with logic, keeps moving forward, and never really switches off.",
-              ].map((text, i) => (
+              {t('aboutNikolBio').map((text, i) => (
                 <motion.p
                   key={i}
                   variants={{
@@ -154,9 +151,15 @@ function About() {
             </div>
           </motion.div>
 
-          <div className="about__person-image">
+          <motion.div
+            className="about__person-image"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 1.3, ease }}
+          >
             <img src="/aboutpagenikol.jpg" alt="nikoleta" loading="lazy" />
-          </div>
+          </motion.div>
         </div>
       </section>
 

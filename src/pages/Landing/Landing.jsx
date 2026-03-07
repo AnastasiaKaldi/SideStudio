@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { motion } from 'framer-motion'
+import { useLanguage } from '../../context/LanguageContext'
 import ProjectCarousel from '../../components/ProjectCarousel/ProjectCarousel'
 import './Landing.css'
 
@@ -12,9 +13,9 @@ const flow = {
   visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease } },
 }
 
-const flowSoft = {
+const flowDelayed = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 1.1, ease } },
+  visible: { opacity: 1, y: 0, transition: { duration: 1.1, ease, delay: 0.3 } },
 }
 
 const flowUp = {
@@ -24,84 +25,39 @@ const flowUp = {
 
 const stagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
+  visible: { transition: { staggerChildren: 0.2, delayChildren: 0.15 } },
 }
 
-const bentoServices = [
-  {
-    id: 1,
-    title: 'social media management',
-    brief: 'end-to-end management of your digital presence.',
-    description: 'we handle content strategy, content creation, planning and posting schedules, captions, community management, and performance tracking — ensuring consistent communication and measurable growth across platforms.',
-    size: 'tall',
-    image: '/bento/socialmediamanagement.jpg',
-  },
-  {
-    id: 2,
-    title: 'content creation',
-    brief: 'original visual content from concept to post-production.',
-    description: 'from concept development and moodboard preparation to photography, videography, and full post-production, we create visual assets ready for immediate use across social media, websites, and paid campaigns.',
-    size: 'wide',
-    image: '/bento/contentcreation.jpg',
-  },
-  {
-    id: 3,
-    title: 'strategy & planning',
-    brief: 'monthly planning aligned with brand goals.',
-    description: 'includes content calendars, campaign planning, positioning strategy, and clearly defined kpis to guide consistent growth and communication.',
-    size: 'normal',
-    image: '/bento/strategy.jpg',
-  },
-  {
-    id: 4,
-    title: 'creative direction',
-    brief: 'shaping the core idea behind a brand\'s visual output.',
-    description: 'from defining the visual language to translating strategy into creative executions, we ensure that content, campaigns, and design assets remain aligned and coherent across all channels.',
-    size: 'large',
-    image: '/bento/creativedirection.jpg',
-  },
-  {
-    id: 5,
-    title: 'design thinking',
-    brief: 'branded assets that support consistent communication.',
-    description: 'creation of essential branded assets including social media visuals, story templates, promotional graphics, and layout elements that support consistent brand communication.',
-    size: 'normal',
-    image: '/bento/designthinking.jpg',
-  },
-  {
-    id: 6,
-    title: 'ads & reporting',
-    brief: 'paid media campaigns, optimized and tracked.',
-    description: 'we handle audience targeting, budget allocation, creative alignment, and tracking configuration. monthly reporting includes performance analysis, key insights, and actionable recommendations to improve results.',
-    size: 'tall',
-    image: '/bento/ads&reporting.jpg',
-  },
-  {
-    id: 7,
-    title: 'brand development',
-    brief: 'building brands from the ground up.',
-    description: 'from naming and visual identity to tone of voice and brand guidelines — we lay the foundation for brands that feel intentional, consistent, and ready to grow.',
-    size: 'tall',
-    image: '/bento/branddev.jpg',
-  },
-  {
-    id: 8,
-    title: 'consulting',
-    brief: 'advisory sessions for brand growth.',
-    description: 'clear feedback, structured guidance, and practical next steps tailored to your brand\'s needs — covering brand positioning, content strategy, digital presence, and performance optimization.',
-    size: 'wide',
-    image: '/bento/consulting.jpg',
-  },
+const serviceImages = [
+  '/bento/socialmediamanagement.jpg',
+  '/bento/contentcreation.jpg',
+  '/bento/strategy.jpg',
+  '/bento/creativedirection.jpg',
+  '/bento/designthinking.jpg',
+  '/bento/ads&reporting.jpg',
+  '/bento/branddev.jpg',
+  '/bento/consulting.jpg',
 ]
+
+const serviceSizes = ['tall', 'wide', 'normal', 'large', 'normal', 'tall', 'tall', 'wide']
 
 const greetings = [
   'hello', 'hola', 'bonjour', 'ciao', 'hallo',
   'olá', 'merhaba', 'ahoj', 'hej', 'namaste',
 ]
 
+const greetingsGr = [
+  'γεια', 'hola', 'bonjour', 'ciao', 'hallo',
+  'olá', 'merhaba', 'ahoj', 'hej', 'namaste',
+]
+
 function Landing() {
   const location = useLocation()
+  const { language, t } = useLanguage()
   const [flippedId, setFlippedId] = useState(null)
+
+  const services = t('services')
+  const currentGreetings = language === 'gr' ? greetingsGr : greetings
 
   // scroll to hash on mount (e.g. from /about clicking "services" in nav)
   useEffect(() => {
@@ -122,7 +78,7 @@ function Landing() {
   const formRef = useRef(null)
 
   useEffect(() => {
-    const word = greetings[greetingIndex]
+    const word = currentGreetings[greetingIndex]
     const timeout = isDeleting ? 50 : 100
 
     if (!isDeleting && greeting === word) {
@@ -132,7 +88,7 @@ function Landing() {
 
     if (isDeleting && greeting === '') {
       setIsDeleting(false)
-      setGreetingIndex((prev) => (prev + 1) % greetings.length)
+      setGreetingIndex((prev) => (prev + 1) % currentGreetings.length)
       return
     }
 
@@ -145,7 +101,7 @@ function Landing() {
     }, timeout)
 
     return () => clearTimeout(timer)
-  }, [greeting, isDeleting, greetingIndex])
+  }, [greeting, isDeleting, greetingIndex, currentGreetings])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -159,8 +115,8 @@ function Landing() {
   return (
     <div className="landing">
       <Helmet>
-        <title>side studio | creative direction, content & strategy</title>
-        <meta name="description" content="Born as a side project, built with intention. Side Studio shapes contemporary brands through strategic creative direction, character-led content, and purposeful design." />
+        <title>{t('pageTitle')}</title>
+        <meta name="description" content={t('pageDescription')} />
       </Helmet>
 
       {/* HERO */}
@@ -171,7 +127,7 @@ function Landing() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, ease }}
         >
-          <img src="/hero.png" alt="side creative studio" className="landing__hero-image" />
+          <img src="/hero.png" alt={t('heroAlt')} className="landing__hero-image" />
         </motion.div>
         <motion.div
           className="landing__logo"
@@ -212,21 +168,21 @@ function Landing() {
           variants={stagger}
         >
           <motion.h2 className="landing__intro-headline" variants={flowUp}>
-            Side Creative Studio is a dynamic platform showcasing a diverse and captivating creative portfolio.
+            {t('introHeadline')}
           </motion.h2>
-          <motion.p variants={flowSoft}>
-            Based in a vibrant city, we are passionate about transforming concepts into compelling visual narratives through our expertise in art direction, photography, and styling.
+          <motion.p variants={flowDelayed}>
+            {t('introP1')}
           </motion.p>
-          <motion.p variants={flowSoft}>
-            Our visual storytelling is a testament to our commitment to delivering pure visual language that resonates with the audience.
+          <motion.p variants={flowDelayed}>
+            {t('introP2')}
           </motion.p>
 
-          <motion.div className="landing__intro-about" variants={flowSoft}>
-            <span className="section-label">about</span>
-            <Link to="/about" className="landing__intro-link">read more</Link>
+          <motion.div className="landing__intro-about" variants={flowDelayed}>
+            <span className="section-label">{t('introAboutLabel')}</span>
+            <Link to="/about" className="landing__intro-link">{t('introReadMore')}</Link>
           </motion.div>
 
-          <motion.div className="landing__intro-cards" variants={flowSoft}>
+          <motion.div className="landing__intro-cards" variants={flowDelayed}>
             <div className="landing__intro-card-wrapper">
               <Link to="/about" className="flip-card">
                 <div className="flip-card__inner">
@@ -234,8 +190,8 @@ function Landing() {
                     <img src="/aboutpagenikos.jpg" alt="nikos" className="flip-card__image" loading="lazy" />
                   </div>
                   <div className="flip-card__back">
-                    <h3 className="flip-card__title">nikolaos</h3>
-                    <p className="flip-card__text">ideas, concepts, and creative storytelling driven by instinct and surrealism.</p>
+                    <h3 className="flip-card__title">{t('flipNikosTitle')}</h3>
+                    <p className="flip-card__text">{t('flipNikosText')}</p>
                     <span className="flip-card__arrow">&rarr;</span>
                   </div>
                 </div>
@@ -249,8 +205,8 @@ function Landing() {
                     <img src="/aboutpagenikol.jpg" alt="nikol" className="flip-card__image" loading="lazy" />
                   </div>
                   <div className="flip-card__back">
-                    <h3 className="flip-card__title">nikoleta</h3>
-                    <p className="flip-card__text">structure, strategy, and aesthetic precision grounded in logic and observation.</p>
+                    <h3 className="flip-card__title">{t('flipNikolTitle')}</h3>
+                    <p className="flip-card__text">{t('flipNikolText')}</p>
                     <span className="flip-card__arrow">&rarr;</span>
                   </div>
                 </div>
@@ -269,9 +225,9 @@ function Landing() {
           viewport={{ once: true, amount: 0.3 }}
           variants={stagger}
         >
-          <motion.span className="section-label" variants={flow}>what we do</motion.span>
-          <motion.p className="landing__projects-subtitle" variants={flow}>
-            a selection of projects we've brought to life.
+          <motion.span className="section-label" variants={flow}>{t('projectsLabel')}</motion.span>
+          <motion.p className="landing__projects-subtitle" variants={flowDelayed}>
+            {t('projectsSubtitle')}
           </motion.p>
         </motion.div>
 
@@ -287,23 +243,23 @@ function Landing() {
           viewport={{ once: true, amount: 0.3 }}
           variants={stagger}
         >
-          <motion.span className="section-label" variants={flow}>our services</motion.span>
-          <motion.p className="services-bento__subtitle" variants={flow}>
-            what we do and how we help brands grow.
+          <motion.span className="section-label" variants={flow}>{t('servicesLabel')}</motion.span>
+          <motion.p className="services-bento__subtitle" variants={flowDelayed}>
+            {t('servicesSubtitle')}
           </motion.p>
         </motion.div>
 
         <div className="services-bento">
           <div className="services-bento__grid">
-            {bentoServices.map((service) => (
+            {services.map((service, i) => (
               <div
                 key={service.id}
-                className={`services-bento__card services-bento__card--${service.size} ${flippedId === service.id ? 'services-bento__card--flipped' : ''}`}
+                className={`services-bento__card services-bento__card--${serviceSizes[i]} ${flippedId === service.id ? 'services-bento__card--flipped' : ''}`}
                 onClick={() => setFlippedId(flippedId === service.id ? null : service.id)}
               >
                 <div className="services-bento__card-inner">
                   <div className="services-bento__card-front">
-                    <div className="services-bento__card-image" style={{ backgroundImage: `url(${service.image})` }} />
+                    <div className="services-bento__card-image" style={{ backgroundImage: `url(${serviceImages[i]})` }} />
                     <div className="services-bento__card-overlay">
                       <span className="services-bento__card-number">{String(service.id).padStart(2, '0')}</span>
                       <h3 className="services-bento__card-title">{service.title}</h3>
@@ -319,7 +275,7 @@ function Landing() {
                       className="services-bento__card-back-cta"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      get in touch &rarr;
+                      {t('servicesCta')} &rarr;
                     </a>
                   </div>
                 </div>
@@ -338,7 +294,7 @@ function Landing() {
           viewport={{ once: true, amount: 0.3 }}
           variants={flow}
         >
-          <span className="section-label">contact us</span>
+          <span className="section-label">{t('contactLabel')}</span>
         </motion.div>
 
         <motion.div
@@ -346,18 +302,18 @@ function Landing() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 1.3, ease }}
+          transition={{ duration: 1.3, ease, delay: 0.3 }}
         >
           {/* left side — message */}
           <div className="postcard__left">
             <h2 className="postcard__heading">
-              let's connect, say <span className="postcard__greeting">{greeting}<span className="postcard__cursor">|</span></span> to us.
+              {t('contactHeadingStart')}<span className="postcard__greeting">{greeting}<span className="postcard__cursor">|</span></span>{t('contactHeadingEnd')}
             </h2>
             <p className="postcard__message">
-              need to speak to someone right away? feel free to contact us using the form — or just say hello. we'd love to hear from you.
+              {t('contactMessage')}
             </p>
             <div className="postcard__from">
-              <p className="postcard__from-label">from athens, with love.</p>
+              <p className="postcard__from-label">{t('contactFrom')}</p>
               <a href="mailto:sidecreativestudio@gmail.com" className="postcard__email">
                 sidecreativestudio@gmail.com
               </a>
@@ -382,7 +338,7 @@ function Landing() {
                 <input
                   type="text"
                   className="postcard__input"
-                  placeholder="name"
+                  placeholder={t('contactName')}
                   required
                 />
               </div>
@@ -390,7 +346,7 @@ function Landing() {
                 <input
                   type="email"
                   className="postcard__input"
-                  placeholder="email"
+                  placeholder={t('contactEmail')}
                   required
                 />
               </div>
@@ -399,7 +355,7 @@ function Landing() {
                   className="postcard__input postcard__input--textarea"
                   value={formMessage}
                   onChange={(e) => setFormMessage(e.target.value)}
-                  placeholder="message"
+                  placeholder={t('contactMessagePlaceholder')}
                   rows={4}
                 />
               </div>
@@ -409,7 +365,7 @@ function Landing() {
                 className="postcard__submit"
                 disabled={isSending || !formMessage.trim()}
               >
-                {isSending ? 'sending...' : 'send'}
+                {isSending ? t('contactSending') : t('contactSend')}
               </button>
             </form>
           </div>
