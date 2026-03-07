@@ -117,19 +117,60 @@
 }
 
 @media (max-width: 768px) {
+  .about {
+    padding: 5rem 0 0;
+  }
+
+  .about__welcome {
+    padding: 2rem var(--content-padding) 4rem;
+  }
+
+  .about__title {
+    font-size: var(--font-size-lg);
+    margin-bottom: 1.5rem;
+  }
+
+  .about__text-block p {
+    font-size: var(--font-size-sm);
+  }
+
+  .about__signature {
+    margin-top: 2.5rem;
+  }
+
+  .about__signature-img {
+    width: 180px;
+  }
+
+  .about__people {
+    padding: 0 var(--content-padding) 4rem;
+    gap: 3rem;
+  }
+
   .about__person {
     grid-template-columns: 1fr;
   }
 
   .about__person-text {
     padding-right: 0;
+    margin-right: 0;
   }
 
   .about__person-image {
     order: -1;
+    margin-bottom: 1.5rem;
   }
 
-  .about__signature-img {
-    width: 200px;
+  .about__person-name {
+    font-size: var(--font-size-md);
+  }
+
+  .about__person-bio {
+    gap: 1.5rem;
+    margin-top: 1.2rem;
+  }
+
+  .about__person-bio p {
+    font-size: var(--font-size-sm);
   }
 }

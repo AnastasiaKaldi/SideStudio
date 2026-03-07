@@ -1,17 +1,23 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import CustomCursor from './components/CustomCursor/CustomCursor'
 import LanguageOverlay from './components/LanguageOverlay/LanguageOverlay'
 import Landing from './pages/Landing/Landing'
 import About from './pages/About/About'
-import Portfolio from './pages/Portfolio/Portfolio'
 import Services from './pages/Services/Services'
 import Contact from './pages/Contact/Contact'
 import { LanguageProvider } from './context/LanguageContext'
 import './App.css'
 
 const pagesWithOwnFooter = ['/about']
+
+const pageTransition = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+  exit: { opacity: 0, transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] } },
+}
 
 function AppContent() {
   const location = useLocation()
@@ -23,13 +29,22 @@ function AppContent() {
       <LanguageOverlay />
       <Navbar />
       <main className="app__content">
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={location.pathname}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={pageTransition}
+          >
+            <Routes location={location}>
+              <Route path="/" element={<Landing />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+          </motion.div>
+        </AnimatePresence>
       </main>
       {!hideGlobalFooter && <Footer />}
     </div>

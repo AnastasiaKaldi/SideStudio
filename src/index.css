@@ -104,3 +104,25 @@ p {
   display: flex;
   flex-direction: column;
 }
+
+/* mobile: reduce padding, font sizes, restore cursor */
+@media (max-width: 768px) {
+  :root {
+    --content-padding: 1.2rem;
+    --font-size-xl: 1.6rem;
+    --font-size-2xl: 2rem;
+    --font-size-3xl: 2.5rem;
+  }
+
+  html, body, a, button {
+    cursor: auto;
+  }
+
+  h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-xl);
+  }
+}
