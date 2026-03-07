@@ -26,10 +26,41 @@
 }
 
 .navbar__logo-img {
-  height: 90px;
-  width: auto;
+  width: 90px;
+  height: auto;
 }
 
+/* hamburger - hidden on desktop */
+.navbar__hamburger {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  flex-direction: column;
+  gap: 5px;
+  cursor: none;
+  z-index: 101;
+}
+
+.navbar__hamburger-line {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background-color: var(--color-black);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.navbar__hamburger--open .navbar__hamburger-line:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.navbar__hamburger--open .navbar__hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar__hamburger--open .navbar__hamburger-line:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
 
 /* red page variant */
 .navbar--red {
@@ -46,7 +77,12 @@
 }
 
 .navbar--red .navbar__link:hover {
-  opacity: 0.6;
+  color: var(--color-black);
+  opacity: 1;
+}
+
+.navbar--red .navbar__hamburger-line {
+  background-color: var(--color-white);
 }
 
 .navbar--red .navbar__lang-btn {
@@ -81,11 +117,11 @@
   font-weight: var(--font-weight-regular);
   text-transform: lowercase;
   position: relative;
-  transition: opacity 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .navbar__link:hover {
-  opacity: 0.5;
+  color: #d50f17;
 }
 
 .navbar__link--active {
@@ -125,11 +161,68 @@
 }
 
 @media (max-width: 768px) {
+  .navbar__inner {
+    padding: 1rem var(--content-padding);
+  }
+
+  .navbar__logo {
+    font-size: var(--font-size-base);
+  }
+
+  .navbar__logo-img {
+    width: 50px;
+    height: auto;
+  }
+
+  .navbar__hamburger {
+    display: flex;
+  }
+
+  .navbar__right {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-white);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 100;
+  }
+
+  .navbar__right--open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .navbar--red .navbar__right {
+    background-color: #d50f17;
+  }
+
   .navbar__links {
-    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
   }
 
   .navbar__link {
-    font-size: var(--font-size-xs);
+    font-size: var(--font-size-lg);
+  }
+
+  .navbar__language {
+    gap: 0.5rem;
+  }
+
+  .navbar__lang-btn {
+    font-size: var(--font-size-sm);
+  }
+
+  .navbar__lang-separator {
+    font-size: var(--font-size-sm);
   }
 }
