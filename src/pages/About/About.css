@@ -1,112 +1,152 @@
 .about {
-  background-color: #d50f17;
+  background-color: #0a0a0a;
   color: var(--color-white);
   min-height: 100vh;
   padding: 8rem 0 0;
 }
 
-/* welcome section */
-.about__welcome {
+/* ── Hero ── */
+.about__hero {
+  text-align: center;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 4rem var(--content-padding) 6rem;
+  padding: 4rem var(--content-padding) 2rem;
 }
 
-.about__title {
+.about__hero-title {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-medium);
-  text-align: center;
-  color: var(--color-white);
-  margin-bottom: 2.5rem;
-  text-transform: none;
+  text-transform: lowercase;
+  margin-bottom: 0.6rem;
 }
 
-.about__text-block {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-.about__text-block p {
+.about__hero-subtitle {
   font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
-  line-height: 1.8;
+  font-weight: var(--font-weight-light);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ── Tabs ── */
+.about__tabs {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  max-width: var(--max-width);
+  margin: 0 auto 2rem;
+  padding: 1.5rem var(--content-padding);
+}
+
+.about__tab {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  font-family: inherit;
+  text-transform: lowercase;
+  cursor: pointer;
+  padding: 0 0 0.3rem;
+  border-bottom: 1px solid transparent;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.about__tab--active {
+  color: var(--color-white);
+  border-bottom-color: var(--color-white);
+}
+
+.about__tab:hover {
   color: var(--color-white);
 }
 
-.about__signature {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 4rem;
-}
-
-.about__signature-img {
-  width: 280px;
-  height: auto;
-}
-
-/* people section */
-.about__people {
+/* ── Sections ── */
+.about__section {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 var(--content-padding) 6rem;
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
+  padding: 3rem var(--content-padding);
 }
 
+.about__section-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  text-transform: lowercase;
+  margin-bottom: 1.5rem;
+}
+
+.about__section-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.about__section-text p {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: justify;
+}
+
+.about__highlight {
+  font-weight: var(--font-weight-semibold);
+  color: #d50f17;
+  margin-top: 0.5rem;
+}
+
+.about__tags {
+  display: block;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  margin-top: 1rem;
+  color: var(--color-white);
+}
+
+/* ── Person cards ── */
 .about__person {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 3rem;
   align-items: start;
-  position: relative;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem var(--content-padding);
 }
 
 .about__person-text {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  position: relative;
-  z-index: 2;
-  padding-right: 0;
-  margin-right: -4rem;
 }
 
 .about__person-name {
   font-size: var(--font-size-lg);
   font-weight: 700;
-  text-align: left;
-  text-transform: uppercase;
-  color: var(--color-white);
-  letter-spacing: 0.05em;
+  text-transform: none;
+  margin-bottom: 0.2rem;
 }
 
-.about__person-title {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-medium);
-  color: rgba(255, 255, 255, 0.7);
-  text-transform: lowercase;
+.about__person-role {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 2rem;
 }
 
 .about__person-bio {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
-  margin-top: 2rem;
+  gap: 1.2rem;
 }
 
 .about__person-bio p {
   font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-regular);
   line-height: 1.7;
-  color: var(--color-white);
+  color: rgba(255, 255, 255, 0.85);
+  text-align: justify;
 }
 
 .about__person-image {
-  width: 100%;
   overflow: hidden;
-  position: relative;
-  z-index: 1;
 }
 
 .about__person-image img {
@@ -116,61 +156,127 @@
   display: block;
 }
 
+/* ── Signature ── */
+.about__signature {
+  display: flex;
+  justify-content: flex-end;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem var(--content-padding);
+}
+
+.about__signature-img {
+  width: 250px;
+  height: auto;
+}
+
+/* ── Quote ── */
+.about__quote {
+  text-align: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 4rem var(--content-padding);
+}
+
+.about__quote p {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-light);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ── CTA ── */
+.about__cta {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 4rem var(--content-padding) 6rem;
+}
+
+.about__cta-text {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.about__cta-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--color-white);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  text-transform: lowercase;
+  transition: border-color 0.3s ease;
+}
+
+.about__cta-button:hover {
+  border-color: var(--color-white);
+}
+
+/* ── Mobile ── */
 @media (max-width: 768px) {
   .about {
     padding: 5rem 0 0;
   }
 
-  .about__welcome {
-    padding: 2rem var(--content-padding) 4rem;
+  .about__hero {
+    padding: 2rem var(--content-padding) 1.5rem;
   }
 
-  .about__title {
+  .about__hero-title {
     font-size: var(--font-size-lg);
-    margin-bottom: 1.5rem;
   }
 
-  .about__text-block p {
+  .about__hero-subtitle {
     font-size: var(--font-size-sm);
   }
 
-  .about__signature {
-    margin-top: 2.5rem;
+  .about__tabs {
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
   }
 
-  .about__signature-img {
-    width: 180px;
+  .about__tab {
+    font-size: var(--font-size-xs, 0.75rem);
   }
 
-  .about__people {
-    padding: 0 var(--content-padding) 4rem;
-    gap: 3rem;
+  .about__section {
+    padding: 2rem var(--content-padding);
+  }
+
+  .about__section-title {
+    font-size: var(--font-size-base);
+  }
+
+  .about__section-text p,
+  .about__person-bio p {
+    font-size: var(--font-size-sm);
   }
 
   .about__person {
     grid-template-columns: 1fr;
-  }
-
-  .about__person-text {
-    padding-right: 0;
-    margin-right: 0;
+    gap: 1.5rem;
+    padding: 1.5rem var(--content-padding);
   }
 
   .about__person-image {
     order: -1;
-    margin-bottom: 1.5rem;
   }
 
   .about__person-name {
     font-size: var(--font-size-md);
   }
 
-  .about__person-bio {
-    gap: 1.5rem;
-    margin-top: 1.2rem;
+  .about__signature-img {
+    width: 180px;
   }
 
-  .about__person-bio p {
-    font-size: var(--font-size-sm);
+  .about__cta {
+    padding: 3rem var(--content-padding) 4rem;
+  }
+
+  .about__cta-text {
+    font-size: var(--font-size-md);
   }
 }

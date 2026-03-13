@@ -4,7 +4,7 @@ import { useLanguage } from '../../context/LanguageContext'
 import { motion } from 'framer-motion'
 import './Navbar.css'
 
-const redPages = ['/about']
+const darkPages = ['/about']
 
 const ease = [0.25, 0.1, 0.25, 1]
 
@@ -12,7 +12,7 @@ function Navbar() {
   const { language, setLanguage, t, handleLanguageHover } = useLanguage()
   const location = useLocation()
   const navigate = useNavigate()
-  const isRedPage = redPages.includes(location.pathname)
+  const isDarkPage = darkPages.includes(location.pathname)
   const isHome = location.pathname === '/'
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -36,7 +36,7 @@ function Navbar() {
 
   return (
     <motion.nav
-      className={`navbar ${isRedPage ? 'navbar--red' : ''}`}
+      className={`navbar ${isDarkPage ? 'navbar--dark' : ''}`}
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.3, ease, delay: 0.1 }}
@@ -46,7 +46,7 @@ function Navbar() {
           {isHome ? (
             'side creative studio'
           ) : (
-            <img src={isRedPage ? '/logowhite.png' : '/logo.png'} alt="S/DE" className="navbar__logo-img" />
+            <img src={isDarkPage ? '/logowhite.png' : '/logo.png'} alt="S/DE" className="navbar__logo-img" />
           )}
         </NavLink>
 
