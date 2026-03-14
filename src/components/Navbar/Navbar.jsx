@@ -20,7 +20,7 @@ function Navbar() {
 
   const navLinks = [
     { label: t('navAbout'), to: '/about' },
-    { label: t('navServices'), anchor: '#services' },
+    { label: t('navServices'), to: '/services' },
     { label: t('navContact'), anchor: '#contact' },
   ]
 

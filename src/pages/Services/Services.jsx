@@ -1,156 +1,149 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { motion } from 'framer-motion'
+import { useLanguage } from '../../context/LanguageContext'
 import './Services.css'
 
-const services = [
-  {
-    id: 1,
-    title: 'social media management',
-    brief: 'end-to-end management of your digital presence.',
-    description: 'we handle content strategy, content creation, planning and posting schedules, captions, community management, and performance tracking — ensuring consistent communication and measurable growth across platforms.',
-    size: 'tall',
-  },
-  {
-    id: 2,
-    title: 'content creation',
-    brief: 'original visual content from concept to post-production.',
-    description: 'from concept development and moodboard preparation to photography, videography, and full post-production, we create visual assets ready for immediate use across social media, websites, and paid campaigns.',
-    size: 'wide',
-  },
-  {
-    id: 3,
-    title: 'strategy & planning',
-    brief: 'monthly planning aligned with brand goals.',
-    description: 'includes content calendars, campaign planning, positioning strategy, and clearly defined kpis to guide consistent growth and communication.',
-    size: 'normal',
-  },
-  {
-    id: 4,
-    title: 'creative direction',
-    brief: 'shaping the core idea behind a brand\'s visual output.',
-    description: 'from defining the visual language to translating strategy into creative executions, we ensure that content, campaigns, and design assets remain aligned and coherent across all channels.',
-    size: 'large',
-  },
-  {
-    id: 5,
-    title: 'design thinking',
-    brief: 'branded assets that support consistent communication.',
-    description: 'creation of essential branded assets including social media visuals, story templates, promotional graphics, and layout elements that support consistent brand communication.',
-    size: 'normal',
-  },
-  {
-    id: 6,
-    title: 'ads & reporting',
-    brief: 'paid media campaigns, optimized and tracked.',
-    description: 'we handle audience targeting, budget allocation, creative alignment, and tracking configuration. monthly reporting includes performance analysis, key insights, and actionable recommendations to improve results.',
-    size: 'tall',
-  },
-  {
-    id: 7,
-    title: 'consulting',
-    brief: 'advisory sessions for brand growth.',
-    description: 'clear feedback, structured guidance, and practical next steps tailored to your brand\'s needs — covering brand positioning, content strategy, digital presence, and performance optimization.',
-    size: 'wide',
-  },
-]
+const ease = [0.25, 0.1, 0.25, 1]
 
-const ease = [0.16, 1, 0.3, 1]
-
-const staggerContainer = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.08, delayChildren: 0.2 },
-  },
+const fadeIn = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease } },
 }
 
-const cardVariant = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
 }
 
 function Services() {
-  const [flippedId, setFlippedId] = useState(null)
+  const { t } = useLanguage()
+  const [activeTab, setActiveTab] = useState(null)
+  const tabs = t('servicesPageTabs')
+  const sections = t('servicesPageSections')
+  const sectionRefs = useRef({})
 
-  const handleCardClick = (id) => {
-    setFlippedId(flippedId === id ? null : id)
+  const handleTabClick = (index) => {
+    if (index === 0) {
+      // "all" tab — scroll to top of content
+      setActiveTab(null)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
+    const section = sections[index - 1]
+    if (section && sectionRefs.current[section.id]) {
+      setActiveTab(index)
+      sectionRefs.current[section.id].scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
   }
 
   return (
-    <div className="services">
+    <div className="services-page">
       <Helmet>
-        <title>services | side studio</title>
-        <meta name="description" content="Creative services by Side Studio — social media management, content creation, strategy, creative direction, design thinking, ads & reporting, and consulting for modern brands." />
+        <title>{t('servicesPageTitle')}</title>
+        <meta name="description" content={t('servicesPageDescription')} />
       </Helmet>
 
+      {/* HERO */}
       <motion.div
-        className="services__header"
+        className="services-page__hero"
         initial="hidden"
         animate="visible"
-        variants={staggerContainer}
+        variants={stagger}
       >
-        <motion.h1 variants={cardVariant}>our services</motion.h1>
-        <motion.p className="services__subtitle" variants={cardVariant}>
-          what we do and how we help brands grow.
+        <motion.h1 className="services-page__title" variants={fadeIn}>
+          {t('servicesPageHeroTitle')}
+        </motion.h1>
+        <motion.p className="services-page__subtitle" variants={fadeIn}>
+          {t('servicesPageHeroSubtitle')}
+        </motion.p>
+        <motion.p className="services-page__desc" variants={fadeIn}>
+          {t('servicesPageHeroDesc')}
+        </motion.p>
+        <motion.p className="services-page__cta-text" variants={fadeIn}>
+          {t('servicesPageHeroCta')}
         </motion.p>
       </motion.div>
 
+      {/* TABS */}
       <motion.div
-        className="services__bento"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
-        variants={staggerContainer}
+        className="services-page__tabs"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease, delay: 0.5 }}
       >
-        {services.map((service) => (
-          <motion.div
-            key={service.id}
-            className={`services__card services__card--${service.size} ${flippedId === service.id ? 'services__card--flipped' : ''}`}
-            variants={cardVariant}
-            onClick={() => handleCardClick(service.id)}
-          >
-            <div className="services__card-inner">
-              {/* FRONT */}
-              <div className="services__card-front">
-                <div className="services__card-image" />
-                <div className="services__card-overlay">
-                  <span className="services__card-number">{String(service.id).padStart(2, '0')}</span>
-                  <h3 className="services__card-title">{service.title}</h3>
-                </div>
-              </div>
-
-              {/* BACK */}
-              <div className="services__card-back">
-                <span className="services__card-number">{String(service.id).padStart(2, '0')}</span>
-                <h3 className="services__card-back-title">{service.title}</h3>
-                <p className="services__card-back-brief">{service.brief}</p>
-                <p className="services__card-back-description">{service.description}</p>
-                <Link
-                  to="/contact"
-                  className="services__card-back-cta"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  get in touch &rarr;
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+        <div className="services-page__tabs-inner">
+          {tabs.slice(1).map((tab, i) => (
+            <button
+              key={tab}
+              className={`services-page__tab ${activeTab === i + 1 ? 'services-page__tab--active' : ''}`}
+              onClick={() => handleTabClick(i + 1)}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
       </motion.div>
 
+      {/* ALL SERVICES INTRO */}
       <motion.div
-        className="services__footer-cta"
+        className="services-page__section services-page__section--all"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.5 }}
-        variants={staggerContainer}
+        viewport={{ once: true, amount: 0.15 }}
+        variants={stagger}
       >
-        <motion.p className="services__closing" variants={cardVariant}>
+        <motion.h2 className="services-page__section-title" variants={fadeIn}>
+          {t('servicesPageAllTitle')}
+        </motion.h2>
+        <motion.p className="services-page__tagline" variants={fadeIn}>
+          {t('servicesPageAllTagline')}
+        </motion.p>
+        <motion.p className="services-page__bold-text" variants={fadeIn}>
+          {t('servicesPageAllBold')}
+        </motion.p>
+        <motion.p className="services-page__body-text" variants={fadeIn}>
+          {t('servicesPageAllText')}
+        </motion.p>
+      </motion.div>
+
+      {/* INDIVIDUAL SERVICE SECTIONS */}
+      {sections.map((section) => (
+        <motion.div
+          key={section.id}
+          ref={(el) => (sectionRefs.current[section.id] = el)}
+          className="services-page__section"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={stagger}
+        >
+          <motion.h2 className="services-page__section-title" variants={fadeIn}>
+            {section.title}
+          </motion.h2>
+          <motion.p className="services-page__bold-text" variants={fadeIn}>
+            {section.bold}
+          </motion.p>
+          <motion.p className="services-page__body-text" variants={fadeIn}>
+            {section.text}
+          </motion.p>
+        </motion.div>
+      ))}
+
+      {/* CTA */}
+      <motion.div
+        className="services-page__footer-cta"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={stagger}
+      >
+        <motion.p className="services-page__closing" variants={fadeIn}>
           good work usually starts with a conversation.
         </motion.p>
-        <motion.div variants={cardVariant}>
-          <Link to="/contact" className="services__cta">— get in touch</Link>
+        <motion.div variants={fadeIn}>
+          <Link to="/#contact" className="services-page__cta-btn">— get in touch</Link>
         </motion.div>
       </motion.div>
     </div>

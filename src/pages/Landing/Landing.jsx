@@ -73,8 +73,12 @@ function Landing() {
   const [greeting, setGreeting] = useState('')
   const [greetingIndex, setGreetingIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [formName, setFormName] = useState('')
+  const [formEmail, setFormEmail] = useState('')
+  const [formCompany, setFormCompany] = useState('')
   const [formMessage, setFormMessage] = useState('')
   const [isSending, setIsSending] = useState(false)
+  const [formStatus, setFormStatus] = useState(null)
   const formRef = useRef(null)
 
   useEffect(() => {
@@ -103,13 +107,38 @@ function Landing() {
     return () => clearTimeout(timer)
   }, [greeting, isDeleting, greetingIndex, currentGreetings])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (!formMessage.trim()) return
     setIsSending(true)
-    const mailtoLink = `mailto:sidecreativestudio@gmail.com?subject=new inquiry&body=${encodeURIComponent(formMessage)}`
-    window.location.href = mailtoLink
-    setTimeout(() => setIsSending(false), 1000)
+    setFormStatus(null)
+
+    try {
+      const res = await fetch('/.netlify/functions/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formName,
+          email: formEmail,
+          company: formCompany,
+          message: formMessage,
+        }),
+      })
+
+      if (res.ok) {
+        setFormStatus('success')
+        setFormName('')
+        setFormEmail('')
+        setFormCompany('')
+        setFormMessage('')
+      } else {
+        setFormStatus('error')
+      }
+    } catch {
+      setFormStatus('error')
+    } finally {
+      setIsSending(false)
+    }
   }
 
   return (
@@ -216,7 +245,7 @@ function Landing() {
         </motion.div>
       </section>
 
-      {/* WHAT WE DO */}
+      {/* WHAT WE DO — commented out for now
       <section className="landing__section landing__section--projects">
         <motion.div
           className="landing__projects-header"
@@ -233,6 +262,7 @@ function Landing() {
 
         <ProjectCarousel />
       </section>
+      */}
 
       {/* SERVICES BENTO GRID */}
       <section id="services" className="landing__section landing__section--services">
@@ -339,6 +369,8 @@ function Landing() {
                   type="text"
                   className="postcard__input"
                   placeholder={t('contactName')}
+                  value={formName}
+                  onChange={(e) => setFormName(e.target.value)}
                   required
                 />
               </div>
@@ -347,7 +379,18 @@ function Landing() {
                   type="email"
                   className="postcard__input"
                   placeholder={t('contactEmail')}
+                  value={formEmail}
+                  onChange={(e) => setFormEmail(e.target.value)}
                   required
+                />
+              </div>
+              <div className="postcard__field">
+                <input
+                  type="text"
+                  className="postcard__input"
+                  placeholder={t('contactCompany')}
+                  value={formCompany}
+                  onChange={(e) => setFormCompany(e.target.value)}
                 />
               </div>
               <div className="postcard__field">
@@ -359,6 +402,13 @@ function Landing() {
                   rows={4}
                 />
               </div>
+
+              {formStatus === 'success' && (
+                <p className="postcard__status postcard__status--success">{t('contactSuccess')}</p>
+              )}
+              {formStatus === 'error' && (
+                <p className="postcard__status postcard__status--error">{t('contactError')}</p>
+              )}
 
               <button
                 type="submit"

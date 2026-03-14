@@ -43,6 +43,69 @@ const translations = {
       { id: 8, title: 'consulting', brief: 'advisory sessions for brand growth.', description: "clear feedback, structured guidance, and practical next steps tailored to your brand's needs — covering brand positioning, content strategy, digital presence, and performance optimization." },
     ],
 
+    // services page
+    servicesPageTitle: 'services | side studio',
+    servicesPageDescription: 'Creative services by Side Studio — social media management, content creation, strategy, creative direction, design thinking, ads & reporting, and consulting.',
+    servicesPageHeroTitle: 'our services',
+    servicesPageHeroSubtitle: 'what we do and how we help brands grow',
+    servicesPageHeroDesc: 'side studio services designed to shape brands through ...',
+    servicesPageHeroCta: 'for business inquiries contact us',
+    servicesPageTabs: ['all', 'social media', 'content', 'strategy', 'creative direction', 'design'],
+    servicesPageAllTitle: 'all services',
+    servicesPageAllTagline: 'the brief said "surprise us". we did.',
+    servicesPageAllBold: 'At Side Studio, strategy, creativity, and execution move together.',
+    servicesPageAllText: 'We support brands through clear direction, thoughtful design, and content that communicates with consistency and purpose. From shaping the core idea behind a brand to producing visual content and managing its digital presence, every service is part of a structured approach designed to create meaningful and measurable results.',
+    servicesPageSections: [
+      {
+        id: 'social-media',
+        title: 'social media',
+        bold: 'End-to-end management of your social media presence.',
+        text: 'We handle content strategy, content creation, planning and posting schedules, captions, community management, and performance tracking — ensuring consistent communication and measurable growth across platforms.',
+      },
+      {
+        id: 'content',
+        title: 'content creation',
+        bold: 'Original visual content developed around your brand identity and strategic direction.',
+        text: 'From concept development and moodboard preparation to photography, videography, and full post-production, we create visual assets ready for immediate use across social media, websites, and paid campaigns.',
+      },
+      {
+        id: 'strategy',
+        title: 'strategy & planning',
+        bold: 'Monthly planning aligned with brand goals and audience behavior.',
+        text: 'Includes content calendars, campaign planning, positioning strategy, and clearly defined KPIs to guide consistent growth and communication.',
+      },
+      {
+        id: 'creative-direction',
+        title: 'creative direction',
+        bold: "Shaping the core idea behind a brand's visual output.",
+        text: 'From defining the visual language to translating strategy into creative executions, we ensure that content, campaigns, and design assets remain aligned and coherent across all channels.',
+      },
+      {
+        id: 'design',
+        title: 'design thinking',
+        bold: 'Branded assets that support consistent communication.',
+        text: 'Creation of essential branded assets including social media visuals, story templates, promotional graphics, and layout elements that support consistent brand communication.',
+      },
+      {
+        id: 'ads',
+        title: 'ads & reporting',
+        bold: 'Paid media campaigns, optimized and tracked.',
+        text: 'We handle audience targeting, budget allocation, creative alignment, and tracking configuration. Monthly reporting includes performance analysis, key insights, and actionable recommendations to improve results.',
+      },
+      {
+        id: 'brand-dev',
+        title: 'brand development',
+        bold: 'Building brands from the ground up.',
+        text: 'From naming and visual identity to tone of voice and brand guidelines — we lay the foundation for brands that feel intentional, consistent, and ready to grow.',
+      },
+      {
+        id: 'consulting',
+        title: 'consulting',
+        bold: 'Advisory sessions for brand growth.',
+        text: "Clear feedback, structured guidance, and practical next steps tailored to your brand's needs — covering brand positioning, content strategy, digital presence, and performance optimization.",
+      },
+    ],
+
     // landing — contact
     contactLabel: 'contact us',
     contactHeadingStart: "let's connect, say ",
@@ -51,9 +114,12 @@ const translations = {
     contactFrom: 'from athens, with love.',
     contactName: 'name',
     contactEmail: 'email',
+    contactCompany: 'company / occupation',
     contactMessagePlaceholder: 'message',
     contactSend: 'send',
     contactSending: 'sending...',
+    contactSuccess: 'message sent successfully!',
+    contactError: 'something went wrong. please try again.',
 
     // projects carousel
     projects: [
@@ -172,6 +238,69 @@ const translations = {
       { id: 8, title: 'consulting', brief: 'συμβουλευτικές συνεδρίες για ανάπτυξη brand.', description: 'σαφές feedback, δομημένη καθοδήγηση και πρακτικά επόμενα βήματα προσαρμοσμένα στις ανάγκες του brand σας — καλύπτοντας brand positioning, content strategy, ψηφιακή παρουσία και βελτιστοποίηση επιδόσεων.' },
     ],
 
+    // services page
+    servicesPageTitle: 'υπηρεσίες | side studio',
+    servicesPageDescription: 'Δημιουργικές υπηρεσίες από το Side Studio — διαχείριση social media, δημιουργία περιεχομένου, στρατηγική, δημιουργική καθοδήγηση, design thinking, διαφημίσεις & reporting και consulting.',
+    servicesPageHeroTitle: 'οι υπηρεσίες μας',
+    servicesPageHeroSubtitle: 'τι κάνουμε και πώς βοηθάμε τα brands να αναπτυχθούν',
+    servicesPageHeroDesc: 'υπηρεσίες side studio σχεδιασμένες να διαμορφώνουν brands μέσα από ...',
+    servicesPageHeroCta: 'για επαγγελματικές ερωτήσεις επικοινωνήστε μαζί μας',
+    servicesPageTabs: ['όλα', 'social media', 'περιεχόμενο', 'στρατηγική', 'δημιουργική καθοδήγηση', 'design'],
+    servicesPageAllTitle: 'όλες οι υπηρεσίες',
+    servicesPageAllTagline: 'το brief έλεγε "εκπλήξτε μας". το κάναμε.',
+    servicesPageAllBold: 'Στο Side Studio, στρατηγική, δημιουργικότητα και εκτέλεση κινούνται μαζί.',
+    servicesPageAllText: 'Υποστηρίζουμε brands μέσα από σαφή καθοδήγηση, σκεπτόμενο design και περιεχόμενο που επικοινωνεί με συνέπεια και σκοπό. Από τη διαμόρφωση της κεντρικής ιδέας ενός brand μέχρι την παραγωγή οπτικού περιεχομένου και τη διαχείριση της ψηφιακής παρουσίας, κάθε υπηρεσία αποτελεί μέρος μιας δομημένης προσέγγισης σχεδιασμένης να δημιουργεί ουσιαστικά και μετρήσιμα αποτελέσματα.',
+    servicesPageSections: [
+      {
+        id: 'social-media',
+        title: 'social media',
+        bold: 'Ολοκληρωμένη διαχείριση της παρουσίας σας στα social media.',
+        text: 'Αναλαμβάνουμε content strategy, δημιουργία περιεχομένου, προγραμματισμό αναρτήσεων, captions, community management και παρακολούθηση επιδόσεων — διασφαλίζοντας συνεπή επικοινωνία και μετρήσιμη ανάπτυξη σε όλες τις πλατφόρμες.',
+      },
+      {
+        id: 'content',
+        title: 'δημιουργία περιεχομένου',
+        bold: 'Πρωτότυπο οπτικό περιεχόμενο αναπτυγμένο γύρω από την ταυτότητα και τη στρατηγική κατεύθυνση του brand σας.',
+        text: 'Από concept development και moodboards μέχρι φωτογραφία, βιντεογράφηση και πλήρη post-production, δημιουργούμε οπτικό υλικό έτοιμο για social media, websites και paid campaigns.',
+      },
+      {
+        id: 'strategy',
+        title: 'στρατηγική & σχεδιασμός',
+        bold: 'Μηνιαίος σχεδιασμός ευθυγραμμισμένος με τους στόχους του brand και τη συμπεριφορά του κοινού.',
+        text: 'Περιλαμβάνει content calendars, σχεδιασμό καμπανιών, στρατηγική positioning και σαφώς καθορισμένα KPIs για συνεπή ανάπτυξη και επικοινωνία.',
+      },
+      {
+        id: 'creative-direction',
+        title: 'δημιουργική καθοδήγηση',
+        bold: 'Διαμορφώνοντας την κεντρική ιδέα πίσω από το οπτικό αποτέλεσμα ενός brand.',
+        text: 'Από τον ορισμό της οπτικής γλώσσας μέχρι τη μετάφραση της στρατηγικής σε δημιουργικές εκτελέσεις, διασφαλίζουμε ότι περιεχόμενο, καμπάνιες και design παραμένουν ευθυγραμμισμένα σε όλα τα κανάλια.',
+      },
+      {
+        id: 'design',
+        title: 'design thinking',
+        bold: 'Branded assets που υποστηρίζουν συνεπή επικοινωνία.',
+        text: 'Δημιουργία βασικών branded assets όπως social media visuals, story templates, promotional graphics και layout elements που στηρίζουν τη συνεπή επικοινωνία του brand.',
+      },
+      {
+        id: 'ads',
+        title: 'διαφημίσεις & reporting',
+        bold: 'Paid media καμπάνιες, βελτιστοποιημένες και παρακολουθούμενες.',
+        text: 'Αναλαμβάνουμε στόχευση κοινού, κατανομή budget, ευθυγράμμιση creatives και tracking configuration. Το μηνιαίο reporting περιλαμβάνει ανάλυση επιδόσεων, insights και actionable recommendations.',
+      },
+      {
+        id: 'brand-dev',
+        title: 'brand development',
+        bold: 'Χτίζοντας brands από το μηδέν.',
+        text: 'Από naming και οπτική ταυτότητα μέχρι tone of voice και brand guidelines — θέτουμε τα θεμέλια για brands που αισθάνονται σκόπιμα, συνεπή και έτοιμα να αναπτυχθούν.',
+      },
+      {
+        id: 'consulting',
+        title: 'consulting',
+        bold: 'Συμβουλευτικές συνεδρίες για ανάπτυξη brand.',
+        text: 'Σαφές feedback, δομημένη καθοδήγηση και πρακτικά επόμενα βήματα προσαρμοσμένα στις ανάγκες του brand σας — καλύπτοντας brand positioning, content strategy, ψηφιακή παρουσία και βελτιστοποίηση επιδόσεων.',
+      },
+    ],
+
     // landing — contact
     contactLabel: 'επικοινωνία',
     contactHeadingStart: 'ας συνδεθούμε, πείτε μας ',
@@ -180,9 +309,12 @@ const translations = {
     contactFrom: 'από την Αθήνα, με αγάπη.',
     contactName: 'όνομα',
     contactEmail: 'email',
+    contactCompany: 'εταιρεία / επάγγελμα',
     contactMessagePlaceholder: 'μήνυμα',
     contactSend: 'αποστολή',
     contactSending: 'αποστολή...',
+    contactSuccess: 'το μήνυμα στάλθηκε επιτυχώς!',
+    contactError: 'κάτι πήγε στραβά. δοκιμάστε ξανά.',
 
     // projects carousel
     projects: [
