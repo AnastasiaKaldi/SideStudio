@@ -1,21 +1,8 @@
 import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { motion } from 'framer-motion'
 import { useLanguage } from '../../context/LanguageContext'
 import './Services.css'
-
-const ease = [0.25, 0.1, 0.25, 1]
-
-const fadeIn = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease } },
-}
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
-}
 
 function Services() {
   const { t } = useLanguage()
@@ -26,7 +13,6 @@ function Services() {
 
   const handleTabClick = (index) => {
     if (index === 0) {
-      // "all" tab — scroll to top of content
       setActiveTab(null)
       window.scrollTo({ top: 0, behavior: 'smooth' })
       return
@@ -46,33 +32,15 @@ function Services() {
       </Helmet>
 
       {/* HERO */}
-      <motion.div
-        className="services-page__hero"
-        initial="hidden"
-        animate="visible"
-        variants={stagger}
-      >
-        <motion.h1 className="services-page__title" variants={fadeIn}>
-          {t('servicesPageHeroTitle')}
-        </motion.h1>
-        <motion.p className="services-page__subtitle" variants={fadeIn}>
-          {t('servicesPageHeroSubtitle')}
-        </motion.p>
-        <motion.p className="services-page__desc" variants={fadeIn}>
-          {t('servicesPageHeroDesc')}
-        </motion.p>
-        <motion.p className="services-page__cta-text" variants={fadeIn}>
-          {t('servicesPageHeroCta')}
-        </motion.p>
-      </motion.div>
+      <div className="services-page__hero">
+        <h1 className="services-page__title">{t('servicesPageHeroTitle')}</h1>
+        <p className="services-page__subtitle">{t('servicesPageHeroSubtitle')}</p>
+        <p className="services-page__desc">{t('servicesPageHeroDesc')}</p>
+        <p className="services-page__cta-text">{t('servicesPageHeroCta')}</p>
+      </div>
 
       {/* TABS */}
-      <motion.div
-        className="services-page__tabs"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, ease, delay: 0.5 }}
-      >
+      <div className="services-page__tabs">
         <div className="services-page__tabs-inner">
           {tabs.slice(1).map((tab, i) => (
             <button
@@ -84,68 +52,36 @@ function Services() {
             </button>
           ))}
         </div>
-      </motion.div>
+      </div>
 
       {/* ALL SERVICES INTRO */}
-      <motion.div
-        className="services-page__section services-page__section--all"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
-        variants={stagger}
-      >
-        <motion.h2 className="services-page__section-title" variants={fadeIn}>
-          {t('servicesPageAllTitle')}
-        </motion.h2>
-        <motion.p className="services-page__tagline" variants={fadeIn}>
-          {t('servicesPageAllTagline')}
-        </motion.p>
-        <motion.p className="services-page__bold-text" variants={fadeIn}>
-          {t('servicesPageAllBold')}
-        </motion.p>
-        <motion.p className="services-page__body-text" variants={fadeIn}>
-          {t('servicesPageAllText')}
-        </motion.p>
-      </motion.div>
+      <div className="services-page__section services-page__section--all">
+        <h2 className="services-page__section-title">{t('servicesPageAllTitle')}</h2>
+        <p className="services-page__tagline">{t('servicesPageAllTagline')}</p>
+        <p className="services-page__bold-text">{t('servicesPageAllBold')}</p>
+        <p className="services-page__body-text">{t('servicesPageAllText')}</p>
+      </div>
 
       {/* INDIVIDUAL SERVICE SECTIONS */}
       {sections.map((section) => (
-        <motion.div
+        <div
           key={section.id}
           ref={(el) => (sectionRefs.current[section.id] = el)}
           className="services-page__section"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          variants={stagger}
         >
-          <motion.h2 className="services-page__section-title" variants={fadeIn}>
-            {section.title}
-          </motion.h2>
-          <motion.p className="services-page__bold-text" variants={fadeIn}>
-            {section.bold}
-          </motion.p>
-          <motion.p className="services-page__body-text" variants={fadeIn}>
-            {section.text}
-          </motion.p>
-        </motion.div>
+          <h2 className="services-page__section-title">{section.title}</h2>
+          <p className="services-page__bold-text">{section.bold}</p>
+          <p className="services-page__body-text">{section.text}</p>
+        </div>
       ))}
 
       {/* CTA */}
-      <motion.div
-        className="services-page__footer-cta"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={stagger}
-      >
-        <motion.p className="services-page__closing" variants={fadeIn}>
-          good work usually starts with a conversation.
-        </motion.p>
-        <motion.div variants={fadeIn}>
+      <div className="services-page__footer-cta">
+        <p className="services-page__closing">good work usually starts with a conversation.</p>
+        <div>
           <Link to="/#contact" className="services-page__cta-btn">— get in touch</Link>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   )
 }

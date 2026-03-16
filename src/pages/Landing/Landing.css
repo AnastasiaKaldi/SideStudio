@@ -55,6 +55,7 @@
 /* video section */
 .landing__section--video {
   background-color: var(--color-black);
+  padding: 0;
 }
 
 .landing__video {
@@ -62,6 +63,8 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  position: absolute;
+  inset: 0;
 }
 
 /* intro section */
@@ -749,7 +752,8 @@
   }
 
   .landing__section--video {
-    height: 50vh;
+    min-height: 100vh;
+    min-height: 100dvh;
   }
 
   .landing__section {
