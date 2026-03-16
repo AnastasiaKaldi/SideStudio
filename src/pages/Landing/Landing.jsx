@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { motion } from 'framer-motion'
 import { useLanguage } from '../../context/LanguageContext'
@@ -53,8 +53,10 @@ const greetingsGr = [
 
 function Landing() {
   const location = useLocation()
+  const navigate = useNavigate()
   const { language, t } = useLanguage()
   const [flippedId, setFlippedId] = useState(null)
+  const [flippedIntroCard, setFlippedIntroCard] = useState(null)
 
   const services = t('services')
   const currentGreetings = language === 'gr' ? greetingsGr : greetings
@@ -212,8 +214,9 @@ function Landing() {
           </motion.div>
 
           <motion.div className="landing__intro-cards" variants={flowDelayed}>
+            {/* Nikos — desktop: link, mobile: tap to flip */}
             <div className="landing__intro-card-wrapper">
-              <Link to="/about" className="flip-card">
+              <Link to="/about" className="flip-card flip-card--desktop">
                 <div className="flip-card__inner">
                   <div className="flip-card__front">
                     <img src="/aboutpagenikos.jpg" alt="nikos" className="flip-card__image" loading="lazy" />
@@ -225,10 +228,26 @@ function Landing() {
                   </div>
                 </div>
               </Link>
+              <div
+                className={`flip-card flip-card--mobile ${flippedIntroCard === 'nikos' ? 'flip-card--flipped' : ''}`}
+                onClick={() => setFlippedIntroCard(flippedIntroCard === 'nikos' ? null : 'nikos')}
+              >
+                <div className="flip-card__inner">
+                  <div className="flip-card__front">
+                    <img src="/aboutpagenikos.jpg" alt="nikos" className="flip-card__image" loading="lazy" />
+                  </div>
+                  <div className="flip-card__back">
+                    <h3 className="flip-card__title">{t('flipNikosTitle')}</h3>
+                    <p className="flip-card__text">{t('flipNikosText')}</p>
+                    <span className="flip-card__arrow">&rarr;</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
+            {/* Nikol — desktop: link, mobile: tap to flip */}
             <div className="landing__intro-card-wrapper">
-              <Link to="/about" className="flip-card">
+              <Link to="/about" className="flip-card flip-card--desktop">
                 <div className="flip-card__inner">
                   <div className="flip-card__front">
                     <img src="/aboutpagenikol.jpg" alt="nikol" className="flip-card__image" loading="lazy" />
@@ -240,6 +259,21 @@ function Landing() {
                   </div>
                 </div>
               </Link>
+              <div
+                className={`flip-card flip-card--mobile ${flippedIntroCard === 'nikol' ? 'flip-card--flipped' : ''}`}
+                onClick={() => setFlippedIntroCard(flippedIntroCard === 'nikol' ? null : 'nikol')}
+              >
+                <div className="flip-card__inner">
+                  <div className="flip-card__front">
+                    <img src="/aboutpagenikol.jpg" alt="nikol" className="flip-card__image" loading="lazy" />
+                  </div>
+                  <div className="flip-card__back">
+                    <h3 className="flip-card__title">{t('flipNikolTitle')}</h3>
+                    <p className="flip-card__text">{t('flipNikolText')}</p>
+                    <span className="flip-card__arrow">&rarr;</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
         </motion.div>

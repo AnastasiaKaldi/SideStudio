@@ -24,6 +24,7 @@
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-light);
   color: rgba(255, 255, 255, 0.6);
+  text-align: center;
 }
 
 /* ── Tabs ── */
@@ -239,6 +240,10 @@
 
   .about__tab {
     font-size: var(--font-size-xs, 0.75rem);
+    cursor: auto;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
 
   .about__section {
@@ -252,6 +257,7 @@
   .about__section-text p,
   .about__person-bio p {
     font-size: var(--font-size-sm);
+    text-align: left;
   }
 
   .about__person {
@@ -262,21 +268,62 @@
 
   .about__person-image {
     order: -1;
+    max-height: 350px;
   }
 
   .about__person-name {
     font-size: var(--font-size-md);
   }
 
+  .about__person-role {
+    font-size: var(--font-size-xs);
+    margin-bottom: 1.2rem;
+  }
+
+  .about__person-bio {
+    gap: 0.8rem;
+  }
+
+  .about__signature {
+    padding: 1.5rem var(--content-padding);
+  }
+
   .about__signature-img {
-    width: 180px;
+    width: 140px;
   }
 
   .about__cta {
-    padding: 3rem var(--content-padding) 4rem;
+    padding: 2.5rem var(--content-padding) 3rem;
   }
 
   .about__cta-text {
-    font-size: var(--font-size-md);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .about__highlight {
+    font-size: var(--font-size-sm);
+  }
+
+  .about__tags {
+    font-size: var(--font-size-xs);
+  }
+
+  .about__quote {
+    padding: 2rem var(--content-padding);
+  }
+
+  .about__quote p {
+    font-size: var(--font-size-sm);
+  }
+
+  .about__cta-button {
+    cursor: auto;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    font-size: var(--font-size-sm);
   }
 }

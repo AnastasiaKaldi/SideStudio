@@ -86,31 +86,52 @@
 
 @media (max-width: 768px) {
   .about-footer {
-    padding: 3rem var(--content-padding) 1.5rem;
+    padding: 2.5rem var(--content-padding) 1.5rem;
+    margin-top: 6rem;
+  }
+
+  .about-footer__logo {
+    margin-bottom: 2rem;
   }
 
   .about-footer__logo-img {
-    width: 60px;
+    width: 50px;
   }
 
   .about-footer__nav {
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
   }
 
   .about-footer__nav-title {
     font-size: var(--font-size-sm);
+    margin-bottom: 0.3rem;
   }
 
   .about-footer__nav-link {
     font-size: var(--font-size-sm);
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+  }
+
+  .about-footer__legal {
+    padding-top: 1.5rem;
   }
 
   .about-footer__legal-link {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+  }
+
+  .about-footer__bottom {
+    padding-top: 2rem;
   }
 
   .about-footer__copyright {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
   }
 }

@@ -95,6 +95,8 @@ p {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-light);
   line-height: 1.8;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 ::selection {
@@ -112,6 +114,11 @@ p {
 @media (max-width: 768px) {
   :root {
     --content-padding: 1.2rem;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-md: 1.1rem;
+    --font-size-lg: 1.35rem;
     --font-size-xl: 1.6rem;
     --font-size-2xl: 2rem;
     --font-size-3xl: 2.5rem;
@@ -127,5 +134,19 @@ p {
 
   h2 {
     font-size: var(--font-size-xl);
+  }
+
+  p {
+    text-align: left;
+  }
+}
+
+/* small phones */
+@media (max-width: 375px) {
+  :root {
+    --content-padding: 1rem;
+    --font-size-xl: 1.4rem;
+    --font-size-2xl: 1.7rem;
+    --font-size-3xl: 2rem;
   }
 }

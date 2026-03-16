@@ -162,7 +162,8 @@
   }
 
   .services-page__hero {
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
+    gap: 0.5rem;
   }
 
   .services-page__title {
@@ -173,24 +174,73 @@
     font-size: var(--font-size-base);
   }
 
+  .services-page__desc,
+  .services-page__cta-text {
+    font-size: var(--font-size-sm);
+  }
+
   .services-page__tabs {
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
   }
 
   .services-page__tabs-inner {
     gap: 1.5rem;
+    justify-content: flex-start;
+    padding-bottom: 0.8rem;
+  }
+
+  .services-page__tab {
+    cursor: auto;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size-sm);
   }
 
   .services-page__section {
-    margin-bottom: 3.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .services-page__section--all {
+    margin-bottom: 3rem;
   }
 
   .services-page__section-title {
     font-size: var(--font-size-md);
+    margin-bottom: 1rem;
+  }
+
+  .services-page__tagline {
+    font-size: var(--font-size-sm);
+    margin-bottom: 1.2rem;
+  }
+
+  .services-page__bold-text {
+    font-size: var(--font-size-base);
+    margin-bottom: 0.8rem;
+  }
+
+  .services-page__body-text {
+    font-size: var(--font-size-sm);
+    text-align: left;
+    line-height: 1.7;
+  }
+
+  .services-page__footer-cta {
+    padding: 2.5rem 0 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .services-page__closing {
+    font-size: var(--font-size-xs);
   }
 
   .services-page__cta-btn {
     font-size: var(--font-size-sm);
     padding: 0.7rem 1.5rem;
+    cursor: auto;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 }

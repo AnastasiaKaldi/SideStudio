@@ -186,14 +186,22 @@
 
   .navbar__hamburger {
     display: flex;
+    cursor: pointer;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    z-index: 102;
+    position: relative;
   }
 
   .navbar__right {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
     background-color: var(--color-white);
     flex-direction: column;
     align-items: center;
@@ -202,7 +210,7 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
-    z-index: 100;
+    z-index: 101;
   }
 
   .navbar__right--open {
@@ -214,6 +222,11 @@
     background-color: #0a0a0a;
   }
 
+  .navbar__logo {
+    z-index: 102;
+    position: relative;
+  }
+
   .navbar__links {
     flex-direction: column;
     align-items: center;
@@ -222,6 +235,11 @@
 
   .navbar__link {
     font-size: var(--font-size-lg);
+    cursor: auto;
+  }
+
+  .navbar__link--anchor {
+    cursor: auto;
   }
 
   .navbar__language {
@@ -230,6 +248,10 @@
 
   .navbar__lang-btn {
     font-size: var(--font-size-sm);
+    cursor: auto;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
 
   .navbar__lang-separator {
