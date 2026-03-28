@@ -224,7 +224,7 @@ function Landing() {
                   <div className="flip-card__back">
                     <h3 className="flip-card__title">{t('flipNikosTitle')}</h3>
                     <p className="flip-card__text">{t('flipNikosText')}</p>
-                    <span className="flip-card__arrow">&rarr;</span>
+
                   </div>
                 </div>
               </Link>
@@ -239,7 +239,7 @@ function Landing() {
                   <div className="flip-card__back">
                     <h3 className="flip-card__title">{t('flipNikosTitle')}</h3>
                     <p className="flip-card__text">{t('flipNikosText')}</p>
-                    <span className="flip-card__arrow">&rarr;</span>
+
                   </div>
                 </div>
               </div>
@@ -255,7 +255,7 @@ function Landing() {
                   <div className="flip-card__back">
                     <h3 className="flip-card__title">{t('flipNikolTitle')}</h3>
                     <p className="flip-card__text">{t('flipNikolText')}</p>
-                    <span className="flip-card__arrow">&rarr;</span>
+
                   </div>
                 </div>
               </Link>
@@ -270,7 +270,7 @@ function Landing() {
                   <div className="flip-card__back">
                     <h3 className="flip-card__title">{t('flipNikolTitle')}</h3>
                     <p className="flip-card__text">{t('flipNikolText')}</p>
-                    <span className="flip-card__arrow">&rarr;</span>
+
                   </div>
                 </div>
               </div>

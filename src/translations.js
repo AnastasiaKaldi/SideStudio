@@ -17,9 +17,9 @@ const translations = {
     introP2: 'Our visual storytelling is a testament to our commitment to delivering pure visual language that resonates with the audience.',
     introAboutLabel: 'about',
     introReadMore: 'read more',
-    flipNikosTitle: 'nikolaos',
+    flipNikosTitle: 'nicos',
     flipNikosText: 'ideas, concepts, and creative storytelling driven by instinct and surrealism.',
-    flipNikolTitle: 'nikoleta',
+    flipNikolTitle: 'nikol',
     flipNikolText: 'structure, strategy, and aesthetic precision grounded in logic and observation.',
 
     // landing — projects
@@ -212,9 +212,9 @@ const translations = {
     introP2: 'Η οπτική μας αφήγηση αποτελεί απόδειξη της δέσμευσής μας στην παροχή καθαρής οπτικής γλώσσας που απευθύνεται στο κοινό.',
     introAboutLabel: 'σχετικά',
     introReadMore: 'περισσότερα',
-    flipNikosTitle: 'νικόλαος',
+    flipNikosTitle: 'nicos',
     flipNikosText: 'ιδέες, concepts και δημιουργική αφήγηση καθοδηγούμενη από το ένστικτο και τον σουρεαλισμό.',
-    flipNikolTitle: 'νικολέτα',
+    flipNikolTitle: 'nikol',
     flipNikolText: 'δομή, στρατηγική και αισθητική ακρίβεια βασισμένη στη λογική και την παρατήρηση.',
 
     // landing — projects

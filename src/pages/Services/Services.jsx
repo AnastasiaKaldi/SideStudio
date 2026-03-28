@@ -20,7 +20,8 @@ function Services() {
     const section = sections[index - 1]
     if (section && sectionRefs.current[section.id]) {
       setActiveTab(index)
-      sectionRefs.current[section.id].scrollIntoView({ behavior: 'smooth', block: 'start' })
+      const y = sectionRefs.current[section.id].getBoundingClientRect().top + window.scrollY - 100
+      window.scrollTo({ top: y, behavior: 'smooth' })
     }
   }
 

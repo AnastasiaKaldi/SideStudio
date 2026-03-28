@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect, memo } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import Navbar from './components/Navbar/Navbar'
@@ -6,10 +6,11 @@ import Footer from './components/Footer/Footer'
 import CustomCursor from './components/CustomCursor/CustomCursor'
 import LanguageOverlay from './components/LanguageOverlay/LanguageOverlay'
 import Landing from './pages/Landing/Landing'
-import About from './pages/About/About'
-import Services from './pages/Services/Services'
 import { LanguageProvider } from './context/LanguageContext'
 import './App.css'
+
+const About = lazy(() => import('./pages/About/About'))
+const Services = lazy(() => import('./pages/Services/Services'))
 
 const pagesWithOwnFooter = ['/about']
 
@@ -18,6 +19,8 @@ const pageTransition = {
   animate: { opacity: 1, transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] } },
   exit: { opacity: 0, transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] } },
 }
+
+const MemoFooter = memo(Footer)
 
 function AppContent() {
   const location = useLocation()
@@ -43,15 +46,17 @@ function AppContent() {
             exit="exit"
             variants={pageTransition}
           >
-            <Routes location={location}>
-              <Route path="/" element={<Landing />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-            </Routes>
+            <Suspense fallback={null}>
+              <Routes location={location}>
+                <Route path="/" element={<Landing />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/services" element={<Services />} />
+              </Routes>
+            </Suspense>
           </motion.div>
         </AnimatePresence>
       </main>
-      {!hideGlobalFooter && <Footer />}
+      {!hideGlobalFooter && <MemoFooter />}
     </div>
   )
 }

@@ -28,7 +28,8 @@ function About() {
   const handleTabClick = (tab) => {
     setActiveTab(tab.id)
     if (tab.ref?.current) {
-      tab.ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      const y = tab.ref.current.getBoundingClientRect().top + window.scrollY - 100
+      window.scrollTo({ top: y, behavior: 'smooth' })
     }
   }
 
