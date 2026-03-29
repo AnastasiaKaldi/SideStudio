@@ -673,6 +673,10 @@
     max-width: 240px;
   }
 
+  .landing__logo {
+    margin-top: 4rem;
+  }
+
   .landing__logo-image {
     width: 50px;
   }
